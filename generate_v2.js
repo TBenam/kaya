@@ -2,11 +2,11 @@ const fs = require('fs');
 let indexHtml = fs.readFileSync('boutique.html', 'utf8');
 
 const products = [
-  { id: 'start', slug: 'pack-start', title: 'PACK START KAYA', img: 'images/imagespack_start.png', badge: 'DECOUVERTE', tags: ['CBD 12%', 'GreenHouse', 'Initiation'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, price: 5000, options: '<option value="5" data-price="5000">5 joints (1000F/u) - 5 000F</option>' },
-  { id: 'semaine', slug: 'semaine', title: 'PACK SEMAINE KAYA', img: 'images/imagespack_semaine.png', badge: 'BESTSELLER', tags: ['CBD 15%', 'Indoor', 'Chill'], desc: `Le pack idéal pour votre semaine. 10 joints de CBD Premium à un prix avantageux. L'équilibre parfait entre détente et énergie.`, price: 9000, options: '<option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option><option value="15" data-price="13000">15 joints (866F/u) - 13 000F</option>' },
-  { id: 'fleur', slug: 'fleur', title: 'POCHON FLEURS PREMIUM', img: 'images/imagesfleur_5g.png', badge: 'BESTSELLER', tags: ['CBD 24%', 'Purple Punch'], desc: `Le format préféré de nos clients réguliers. 5 grammes de fleurs Indoor aux arômes puissants et à l'effet profondément relaxant.`, price: 8000, options: '<option value="5g" data-price="8000">5g (1600F/g) - 8 000F</option><option value="10g" data-price="15000">10g (1500F/g) - 15 000F</option><option value="3g" data-price="5000">3g (1666F/g) - 5 000F</option>' },
-  { id: 'chill', slug: 'chill', title: 'PACK CHILL KAYA', img: 'images/imagespack_chill.png', badge: 'BESTSELLER', tags: ['CBD 18%', 'Relax'], desc: `Une sélection haut de gamme pour des moments de relaxation profonde. 20 joints de pure qualité Indoor, riches en saveurs et en effets apaisants.`, price: 17000, options: '<option value="20" data-price="17000">20 joints (850F/u) - 17 000F</option>' },
-  { id: 'party', slug: 'party', title: 'PARTY PACK KAYA', img: 'images/imagespack_party.png', badge: 'PROMO', tags: ['CBD 20%', 'Gros Volume'], desc: `Parfait pour vos événements ou pour faire des réserves. 50 joints Premium, roulés à la perfection, offrant un effet festif et convivial exceptionnel.`, price: 40000, options: '<option value="50" data-price="40000">50 joints (800F/u) - 40 000F</option>' }
+  { id: 'start', slug: 'pack-start', title: 'PACK START KAYA', img: 'images/imagespack_start.png', badge: 'DECOUVERTE', tags: ['Cannabis 12%', 'GreenHouse', 'Initiation'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, price: 5000, options: '<option value="5" data-price="5000">5 joints (1000F/u) - 5 000F</option>' },
+  { id: 'semaine', slug: 'semaine', title: 'PACK SEMAINE KAYA', img: 'images/imagespack_semaine.png', badge: 'BESTSELLER', tags: ['Cannabis 15%', 'Indoor', 'Chill'], desc: `Le pack idéal pour votre semaine. 10 joints de Cannabis Premium à un prix avantageux. L'équilibre parfait entre détente et énergie.`, price: 9000, options: '<option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option><option value="15" data-price="13000">15 joints (866F/u) - 13 000F</option>' },
+  { id: 'fleur', slug: 'fleur', title: 'POCHON FLEURS PREMIUM', img: 'images/imagesfleur_5g.png', badge: 'BESTSELLER', tags: ['Cannabis 24%', 'Purple Punch'], desc: `Le format préféré de nos clients réguliers. 5 grammes de fleurs Indoor aux arômes puissants et à l'effet profondément relaxant.`, price: 8000, options: '<option value="5g" data-price="8000">5g (1600F/g) - 8 000F</option><option value="10g" data-price="15000">10g (1500F/g) - 15 000F</option><option value="3g" data-price="5000">3g (1666F/g) - 5 000F</option>' },
+  { id: 'chill', slug: 'chill', title: 'PACK CHILL KAYA', img: 'images/imagespack_chill.png', badge: 'BESTSELLER', tags: ['Cannabis 18%', 'Relax'], desc: `Une sélection haut de gamme pour des moments de relaxation profonde. 20 joints de pure qualité Indoor, riches en saveurs et en effets apaisants.`, price: 17000, options: '<option value="20" data-price="17000">20 joints (850F/u) - 17 000F</option>' },
+  { id: 'party', slug: 'party', title: 'PARTY PACK KAYA', img: 'images/imagespack_party.png', badge: 'PROMO', tags: ['Cannabis 20%', 'Gros Volume'], desc: `Parfait pour vos événements ou pour faire des réserves. 50 joints Premium, roulés à la perfection, offrant un effet festif et convivial exceptionnel.`, price: 40000, options: '<option value="50" data-price="40000">50 joints (800F/u) - 40 000F</option>' }
 ];
 
 const header = indexHtml.split('<section class="hero-banner"')[0];
@@ -69,7 +69,7 @@ products.forEach(p => {
 </section>
 `;
 
-  const pageHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${p.title} - KAYA Premium CBD</title>`) + content + footer;
+  const pageHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${p.title} - KAYA Premium Cannabis</title>`) + content + footer;
   fs.writeFileSync(`produit-${p.slug}.html`, pageHtml);
   console.log(`Generated produit-${p.slug}.html`);
 });

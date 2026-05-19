@@ -3,13 +3,13 @@ const fs = require('fs');
 const indexHtml = fs.readFileSync('boutique.html', 'utf8');
 
 const products = [
-  { id: 'start', slug: 'pack-start', name: 'Pack "Start" – 5 joints', price: 5000, oldPrice: '', img: 'images/pack_start.png', badge: 'Entrée de Gamme', stars: '★★★★★', specs: ['🍀 CBD : 12%', '🏡 Culture : GreenHouse', '✨ Effet : Chill'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, unit: '1 000F / joint' },
-  { id: 'semaine', slug: 'pack-semaine', name: 'Pack "Semaine" – 10 joints', price: 9000, oldPrice: '10 000F', img: 'images/pack_semaine.png', badge: 'Best Seller', stars: '★★★★★', specs: ['🍀 CBD : 15%', '🏡 Culture : Mix Indoor', '⚡ Effet : Équilibre'], desc: `Le pack idéal pour votre semaine. 10 joints de CBD Premium à un prix avantageux. L'équilibre parfait entre détente et énergie.`, unit: 'old-price' },
-  { id: 'chill', slug: 'pack-chill', name: 'Pack "Chill" – 20 joints', price: 17000, oldPrice: '20 000F', img: 'images/pack_chill.png', badge: 'Haute Qualité', stars: '★★★★★', specs: ['🍀 CBD : 18%', '💎 Culture : Indoor', '🌙 Effet : Relax'], desc: `Une sélection haut de gamme pour des moments de relaxation profonde. 20 joints de pure qualité Indoor, riches en saveurs et en effets apaisants.`, unit: 'old-price' },
-  { id: 'party', slug: 'party-pack', name: 'Party Pack – 50 joints', price: 40000, oldPrice: '50 000F', img: 'images/pack_party.png', badge: 'Gros Volume', stars: '★★★★★', specs: ['🍀 CBD : 20%', '👑 Culture : Premium Indoor', '🎉 Effet : Social / Party'], desc: `Parfait pour vos événements ou pour faire des réserves. 50 joints Premium, roulés à la perfection, offrant un effet festif et convivial exceptionnel.`, unit: 'old-price' },
-  { id: 'fleur3g', slug: 'fleur-3g', name: 'Pochon Fleurs – 3 Grammes', price: 5000, oldPrice: '', img: 'images/fleur_3g.png', badge: 'Découverte', stars: '★★★★★', specs: ['🍀 CBD : 22%', '💎 Variété : Lemon Haze (Sativa)', '⚡ Effet : Énergie'], desc: `Un pochon de 3 grammes pour découvrir nos fleurs brutes. Des têtes denses, manucurées avec soin, parfaites pour les puristes qui aiment rouler eux-mêmes.`, unit: '≈ 1 666F / g' },
-  { id: 'fleur5g', slug: 'fleur-5g', name: 'Pochon Fleurs – 5 Grammes', price: 8000, oldPrice: '', img: 'images/fleur_5g.png', badge: 'Le Choix des Connaisseurs', stars: '★★★★★', specs: ['🍀 CBD : 24%', '💎 Variété : Purple Punch (Indica)', '🌙 Effet : Détente Intense'], desc: `Le format préféré de nos clients réguliers. 5 grammes de fleurs Indoor aux arômes puissants et à l'effet profondément relaxant.`, unit: '1 600F / g' },
-  { id: 'fleur10g', slug: 'fleur-10g', name: 'Pochon Fleurs – 10 Grammes', price: 15000, oldPrice: '', img: 'images/fleur_10g.png', badge: 'Premium Collection', stars: '★★★★★', specs: ['🍀 CBD : 25%', '💎 Variété : OG Kush / Kaya Special', '☯️ Effet : Harmonie'], desc: `Notre offre la plus généreuse pour les vrais connaisseurs. 10 grammes de notre meilleure récolte, affinée pour développer un profil terpénique exceptionnel.`, unit: '1 500F / g' }
+  { id: 'start', slug: 'pack-start', name: 'Pack "Start" – 5 joints', price: 5000, oldPrice: '', img: 'images/pack_start.png', badge: 'Entrée de Gamme', stars: '★★★★★', specs: ['🍀 Cannabis : 12%', '🏡 Culture : GreenHouse', '✨ Effet : Chill'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, unit: '1 000F / joint' },
+  { id: 'semaine', slug: 'pack-semaine', name: 'Pack "Semaine" – 10 joints', price: 9000, oldPrice: '10 000F', img: 'images/pack_semaine.png', badge: 'Best Seller', stars: '★★★★★', specs: ['🍀 Cannabis : 15%', '🏡 Culture : Mix Indoor', '⚡ Effet : Équilibre'], desc: `Le pack idéal pour votre semaine. 10 joints de Cannabis Premium à un prix avantageux. L'équilibre parfait entre détente et énergie.`, unit: 'old-price' },
+  { id: 'chill', slug: 'pack-chill', name: 'Pack "Chill" – 20 joints', price: 17000, oldPrice: '20 000F', img: 'images/pack_chill.png', badge: 'Haute Qualité', stars: '★★★★★', specs: ['🍀 Cannabis : 18%', '💎 Culture : Indoor', '🌙 Effet : Relax'], desc: `Une sélection haut de gamme pour des moments de relaxation profonde. 20 joints de pure qualité Indoor, riches en saveurs et en effets apaisants.`, unit: 'old-price' },
+  { id: 'party', slug: 'party-pack', name: 'Party Pack – 50 joints', price: 40000, oldPrice: '50 000F', img: 'images/pack_party.png', badge: 'Gros Volume', stars: '★★★★★', specs: ['🍀 Cannabis : 20%', '👑 Culture : Premium Indoor', '🎉 Effet : Social / Party'], desc: `Parfait pour vos événements ou pour faire des réserves. 50 joints Premium, roulés à la perfection, offrant un effet festif et convivial exceptionnel.`, unit: 'old-price' },
+  { id: 'fleur3g', slug: 'fleur-3g', name: 'Pochon Fleurs – 3 Grammes', price: 5000, oldPrice: '', img: 'images/fleur_3g.png', badge: 'Découverte', stars: '★★★★★', specs: ['🍀 Cannabis : 22%', '💎 Variété : Lemon Haze (Sativa)', '⚡ Effet : Énergie'], desc: `Un pochon de 3 grammes pour découvrir nos fleurs brutes. Des têtes denses, manucurées avec soin, parfaites pour les puristes qui aiment rouler eux-mêmes.`, unit: '≈ 1 666F / g' },
+  { id: 'fleur5g', slug: 'fleur-5g', name: 'Pochon Fleurs – 5 Grammes', price: 8000, oldPrice: '', img: 'images/fleur_5g.png', badge: 'Le Choix des Connaisseurs', stars: '★★★★★', specs: ['🍀 Cannabis : 24%', '💎 Variété : Purple Punch (Indica)', '🌙 Effet : Détente Intense'], desc: `Le format préféré de nos clients réguliers. 5 grammes de fleurs Indoor aux arômes puissants et à l'effet profondément relaxant.`, unit: '1 600F / g' },
+  { id: 'fleur10g', slug: 'fleur-10g', name: 'Pochon Fleurs – 10 Grammes', price: 15000, oldPrice: '', img: 'images/fleur_10g.png', badge: 'Premium Collection', stars: '★★★★★', specs: ['🍀 Cannabis : 25%', '💎 Variété : OG Kush / Kaya Special', '☯️ Effet : Harmonie'], desc: `Notre offre la plus généreuse pour les vrais connaisseurs. 10 grammes de notre meilleure récolte, affinée pour développer un profil terpénique exceptionnel.`, unit: '1 500F / g' }
 ];
 
 const header = indexHtml.split('<!-- HERO -->')[0];
@@ -17,7 +17,7 @@ const footer = '<!-- FOOTER -->' + indexHtml.split('<!-- FOOTER -->')[1];
 
 products.forEach(p => {
   const oldPriceHtml = p.oldPrice ? `<span class="product-unit old-price">${p.oldPrice}</span>` : `<span class="product-unit">${p.unit}</span>`;
-  
+
   const content = `
 <!-- PRODUCT DETAIL -->
 <section class="product-detail-section" style="padding: 120px 0 80px; min-height: 80vh;">
@@ -59,13 +59,13 @@ products.forEach(p => {
   </div>
 </section>
   `;
-  
+
   // replace nav links in header to use absolute 'index.html#...'
   let headerHtml = header.replace(/href="#/g, 'href="boutique.html#');
-  
+
   // Update the title
-  headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${p.name} - KAYA Premium CBD</title>`);
-  
+  headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${p.name} - KAYA Premium Cannabis</title>`);
+
   const pageContent = headerHtml + content + footer;
   fs.writeFileSync(`produit-${p.slug}.html`, pageContent);
   console.log('Created produit-' + p.slug + '.html');

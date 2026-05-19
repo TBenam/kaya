@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lueur & Senteur | Bougies Artisanales</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        /* BASE & RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            width: 100vw;
+            background: #FFFFFF;
+            font-family: 'Lora', serif;
+            color: #333;
+            transition: background 1s ease;
+        }
+
+        /* LOCK SCROLL DURING PORTAL */
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* PHASE 1: FAKE E-COMMERCE SHOP */
+        #fake-shop {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.5s, filter 0.5s;
+        }
+
+        /* Header */
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid #EBEBEB;
+            background: #FFF;
+        }
+
+        .shop-header .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #5B6356;
+            text-align: center;
+        }
+
+        .shop-header nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .shop-header nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .shop-header nav a:hover {
+            color: #000;
+        }
+
+        /* Banner */
+        .shop-banner {
+            background: #F4F1EA;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .shop-banner h2 {
+            font-size: 2.5rem;
+            color: #4A4A4A;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .shop-banner p {
+            font-size: 1.1rem;
+            color: #7A7A7A;
+            font-style: italic;
+        }
+
+        /* Product Grid */
+        .product-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .product-container h3 {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #4A4A4A;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .product-card {
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 350px;
+            background-color: #F9F9F9;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background: #5B6356;
+            color: white;
+            padding: 12px 0;
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #454B41;
+        }
+
+        /* Footer */
+        .shop-footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px;
+            background: #FAFAFA;
+            font-size: 0.9rem;
+            color: #999;
+            border-top: 1px solid #EBEBEB;
+        }
+
+        /* GLITCH EFFECT */
+        .glitch-active {
+            animation: glitchBody 1.5s forwards;
+        }
+
+        @keyframes glitchBody {
+            0% {
+                filter: invert(0);
+            }
+
+            10% {
+                filter: invert(1) hue-rotate(180deg);
+                transform: translateX(5px);
+            }
+
+            20% {
+                filter: invert(0) blur(5px);
+                transform: translateX(-5px);
+            }
+
+            30% {
+                filter: invert(1) contrast(300%);
+                background: #000;
+                transform: skewX(10deg);
+            }
+
+            40% {
+                filter: invert(0);
+                transform: skewX(-10deg);
+            }
+
+            50% {
+                filter: invert(1) drop-shadow(10px 10px 0 red);
+            }
+
+            100% {
+                filter: invert(0);
+                background: #07070a;
+                color: transparent;
+            }
+        }
+
+        /* PHASE 2 & 3: SECRET PORTAL (AGE + FAQ) */
+        .portal-ui {
+            display: none;
+            position: fixed;
+            inset: 0;
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            background: #07070a;
+            background-image: radial-gradient(circle at 50% 0%, #220b38 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #0d2b1f 0%, transparent 50%);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            padding: 20px;
+        }
+
+        .portal-ui.show {
+            display: flex;
+            animation: fadeIn 1s forwards 0.5s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transform: translateY(20px);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #00FF87, #60EFFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card p {
+            color: #A0A0B0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00FF87, #60EFFF);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 135, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* FAQ SECTION */
+        #faq-section {
+            display: none;
+            text-align: left;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+        }
+
+        .faq-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item summary {
+            font-weight: 600;
+            font-size: 1.15rem;
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #E0E0E0;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            color: #00FF87;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+            color: #60EFFF;
+        }
+
+        .faq-item p {
+            margin-top: 1rem;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #8A8A9B;
+            line-height: 1.6;
+            padding-left: 0.5rem;
+            border-left: 2px solid #00FF87;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .skip-btn {
+            width: 100%;
+            margin-top: 2rem;
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .skip-btn:hover {
+            border-style: solid;
+            border-color: #60EFFF;
+            color: #60EFFF;
+            background: rgba(96, 239, 255, 0.05);
+            letter-spacing: 1px;
+        }
+
+        /* PHASE 4: THE TRIP */
+        #trip-zone {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: #000;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tunnel {
+            position: absolute;
+            width: 200vw;
+            height: 200vh;
+            background: repeating-conic-gradient(from 0deg, #000 0deg 20deg, #100b2e 20deg 40deg, #052619 40deg 60deg);
+            animation: spinTunnel 4s linear infinite, colorShift 4s alternate infinite;
+            filter: blur(10px);
+            opacity: 0;
+            transform: scale(0.1);
+        }
+
+        .trip-text {
+            position: relative;
+            z-index: 1000;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            text-shadow: 0 0 20px #00FF87, 0 0 40px #60EFFF;
+            animation: pulseText 1s infinite alternate;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .trip-active #trip-zone {
+            display: flex;
+        }
+
+        .trip-active .tunnel {
+            animation: spinTunnel 1.5s cubic-bezier(0.5, 0, 0.5, 1) forwards, diveIn 3.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        }
+
+        @keyframes spinTunnel {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes diveIn {
+            0% {
+                transform: scale(0.1) rotate(0);
+                opacity: 0;
+                filter: hue-rotate(0deg) blur(20px);
+            }
+
+            50% {
+                opacity: 1;
+                filter: hue-rotate(180deg) blur(5px);
+            }
+
+            100% {
+                transform: scale(4) rotate(720deg);
+                opacity: 1;
+                filter: hue-rotate(360deg) blur(0px);
+            }
+        }
+
+        @keyframes pulseText {
+            from {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            to {
+                transform: scale(1.15);
+                opacity: 1;
+                text-shadow: 0 0 40px #00FF87, 0 0 80px #60EFFF, 0 0 120px #00FF87;
+            }
+        }
+
+        /* RESPONSIVE TWEAKS */
+        @media(max-width: 900px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-img {
+                height: 250px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            /* Shop fixes for Mobile */
+            .shop-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .shop-banner {
+                padding: 40px 15px;
+            }
+
+            .shop-banner h2 {
+                font-size: 1.8rem;
+            }
+
+            /* EXACTLY 2 cols x 3 rows on mobile */
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .product-container {
+                margin: 30px auto;
+                padding: 0 10px;
+            }
+
+            .product-container h3 {
+                font-size: 1.5rem;
+                margin-bottom: 25px;
+            }
+
+            .product-img {
+                height: 160px;
+                margin-bottom: 10px;
+            }
+
+            .product-title {
+                font-size: 0.95rem;
+                line-height: 1.2;
+            }
+
+            .product-price {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .add-to-cart {
+                padding: 8px 0;
+                font-size: 0.85rem;
+            }
+
+            /* Glass Card / Portal UI fixes for Mobile */
+            .portal-ui {
+                padding: 15px;
+            }
+
+            .glass-card {
+                padding: 1.5rem;
+                border-radius: 16px;
+                max-height: 90vh;
+                /* Empêche de déborder de l'écran */
+                overflow-y: auto;
+                /* Rend la FAQ scrollable verticalement */
+            }
+
+            .glass-card h2 {
+                font-size: 1.8rem;
+            }
+
+            .glass-card p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Cibles tactiles plus larges pour les boutons */
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 16px;
+                font-size: 1.1rem;
+                border-radius: 14px;
+            }
+
+            .skip-btn {
+                padding: 16px;
+                font-size: 1.1rem;
+                border-radius: 14px;
+                margin-top: 1.5rem;
+            }
+
+            /* Cibles tactiles pour la FAQ */
+            .faq-item summary {
+                font-size: 1.05rem;
+                padding: 10px 0;
+            }
+
+            .faq-item p {
+                font-size: 0.95rem;
+                margin-top: 0.5rem;
+            }
+
+            /* Texte de décollage */
+            .trip-text {
+                font-size: 1.8rem;
+                letter-spacing: 4px;
+            }
+        }
+
+        /* Ultra petits écrans (ex: iPhone SE) */
+        @media(max-width: 380px) {
+            .product-img {
+                height: 130px;
+            }
+
+            .glass-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .faq-item summary {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PHASE 1: FAKE SHOP -->
+    <div id="fake-shop">
+        <header class="shop-header">
+            <div class="logo">Lueur & Senteur</div>
+            <nav>
+                <a href="#">Accueil</a>
+                <a href="#">Bougies</a>
+                <a href="#">Diffuseurs</a>
+                <a href="#">Panier (0)</a>
+            </nav>
+        </header>
+
+        <div class="shop-banner">
+            <h2>La douceur à l'état pur.</h2>
+            <p>100% cire d'abeille. Fait main avec passion et huiles essentielles.</p>
+        </div>
+
+        <div class="product-container">
+            <h3>Nos Bougies Apaisantes</h3>
+
+            <div class="product-grid">
+                <!-- Normal Product 1 -->
+                <div class="product-card" onclick="handleNormalClick()">
+                    <img src="https://loremflickr.com/400/400/candle?lock=1" alt="Bougie Douce Nuit"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Douce Nuit</h4>
+                    <p class="product-price">3 500F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <!-- Normal Product 2 -->
+                <div class="product-card" onclick="handleNormalClick()">
+                    <img src="https://loremflickr.com/400/400/candle?lock=2" alt="Bougie Vanille Bourbon"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Vanille Bourbon</h4>
+                    <p class="product-price">4 200F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <!-- Normal Product 3 -->
+                <div class="product-card" onclick="handleNormalClick()">
+                    <img src="https://loremflickr.com/400/400/candle?lock=3" alt="Bougie Évasion Cannelle"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Évasion Cannelle</h4>
+                    <p class="product-price">2 800F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <!-- Normal Product 4 -->
+                <div class="product-card" onclick="handleNormalClick()">
+                    <img src="https://loremflickr.com/400/400/candle?lock=4" alt="Bougie Fleur de Coton"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Fleur de Coton</h4>
+                    <p class="product-price">3 000F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <!-- SECRET PRODUCT (Trigger) - Product 5 -->
+                <div class="product-card" onclick="handleSecretClick(this)">
+                    <img src="https://loremflickr.com/400/400/candle?lock=5" alt="Bougie Mystique Cèdre"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Mystique Cèdre</h4>
+                    <p class="product-price" style="font-weight: bold; color: #4A4A4A;">5 900F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <!-- Normal Product 6 -->
+                <div class="product-card" onclick="handleNormalClick()">
+                    <img src="https://loremflickr.com/400/400/candle?lock=6" alt="Bougie Rose Éternelle"
+                        class="product-img">
+                    <h4 class="product-title">Bougie Rose Éternelle</h4>
+                    <p class="product-price">6 200F</p>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="shop-footer">
+            <p>© 2026 Lueur & Senteur - Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <!-- PHASE 2 & 3: SECRET PORTAL (AGE + FAQ) -->
+    <div id="portal-ui" class="portal-ui">
+
+        <!-- AGE CHECK -->
+        <div id="age-check" class="glass-card">
+            <h2>Halte là, voyageur.</h2>
+            <p>Vous êtes sur le point de quitter la réalité ordinaire. Avez-vous plus de 21 ans pour franchir cette
+                porte ?</p>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="acceptAge()">Oui, j'ai +21 ans</button>
+                <button class="btn btn-secondary" onclick="rejectAge()">Non, je retourne aux bougies</button>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div id="faq-section" class="glass-card">
+            <h2>Le Sas de Décompression</h2>
+            <p>Avant d'aller plus loin, quelques infos utiles :</p>
+
+            <details class="faq-item">
+                <summary>C'est quoi ce délire ?</summary>
+                <p>Vous venez de découvrir KAYA, le côté secret de la détente. Fini les bougies classiques, place au
+                    vrai bien-être et à la relaxation profonde.</p>
+            </details>
+            <details class="faq-item">
+                <summary>C'est légal votre truc ?</summary>
+                <p>100% légal, 0% bad trip. On ne vend que du Cannabis premium, rigoureusement testé en laboratoire et
+                    respectant strictement les normes européennes.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Je vais planer ?</summary>
+                <p>Vous allez surtout relâcher la pression. Nos produits apaisent le corps et l'esprit, sans les effets
+                    psychotropes du THC. Juste du chill à l'état pur.</p>
+            </details>
+
+            <button class="skip-btn" onclick="startTrip()">Je suis prêt, faites-moi décoller 🚀</button>
+        </div>
+
+    </div>
+
+    <!-- PHASE 4: THE TRIP -->
+    <div id="trip-zone">
+        <div class="tunnel"></div>
+        <div class="trip-text" id="trip-msg">Décollage...</div>
+    </div>
+
+    <script>
+        const shop = document.getElementById('fake-shop');
+        const portalUi = document.getElementById('portal-ui');
+        const ageCheck = document.getElementById('age-check');
+        const faqSection = document.getElementById('faq-section');
+        const body = document.body;
+
+        function handleNormalClick() {
+            // Un petit message chiant d'e-commerce
+            const messages = [
+                "Désolé, cette bougie est actuellement en rupture de stock.",
+                "Ce parfum n'est plus disponible.",
+                "Victime de son succès, veuillez revenir plus tard.",
+                "Il semble y avoir une erreur avec le panier."
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMsg);
+        }
+
+        let secretClicks = 0;
+
+        function handleSecretClick(element) {
+            secretClicks++;
+
+            if (secretClicks < 4) {
+                // Effets visuels progressifs sur la bougie cliquée
+                element.style.transform = `scale(${1 + secretClicks * 0.05}) rotate(${secretClicks * 2}deg)`;
+                element.style.filter = `hue-rotate(${secretClicks * 30}deg)`;
+
+                // Petit twist au niveau du texte pour faire monter le suspense
+                if (secretClicks === 2) {
+                    element.querySelector('.product-title').innerText = "Bougie Mystique... KAYA ?";
+                }
+                if (secretClicks === 3) {
+                    element.querySelector('.product-title').innerText = "La réalité se fissure...";
+                    element.querySelector('.product-title').style.color = "#4c8d50";
+                }
+            } else {
+                // 4ème clic = Boum !
+                element.style.transform = "scale(1.2) rotate(10deg)";
+                element.style.filter = "hue-rotate(90deg) contrast(200%)";
+
+                setTimeout(() => {
+                    initiateBreach();
+                }, 400);
+            }
+        }
+
+        function initiateBreach() {
+            // Verrouille le scroll
+            body.classList.add('locked');
+
+            // Déclenche l'animation de glitch sur la page entière
+            body.classList.add('glitch-active');
+
+            // Disparition en douceur de la boutique
+            shop.style.opacity = '0';
+
+            setTimeout(() => {
+                shop.style.display = 'none';
+                portalUi.classList.add('show');
+                document.title = "KAYA - Accès Secret";
+            }, 1200); // Laisse le temps au glitch de faire effet
+        }
+
+        function acceptAge() {
+            ageCheck.style.display = 'none';
+            faqSection.style.display = 'block';
+            faqSection.style.animation = 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        }
+
+        function rejectAge() {
+            alert("Revenez quand vous serez plus grand ! En attendant, achetez une vraie bougie.");
+            location.reload();
+        }
+
+        function startTrip() {
+            portalUi.style.display = 'none';
+            body.classList.add('trip-active');
+
+            const messages = ["Relaxation imminente...", "Oubliez le stress...", "Bienvenue chez KAYA"];
+            const msgEl = document.getElementById('trip-msg');
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < messages.length) {
+                    msgEl.innerText = messages[i];
+                    i++;
+                }
+            }, 900);
+
+            // Redirection vers le vrai site après l'animation
+            setTimeout(() => {
+                clearInterval(interval);
+                window.location.href = 'index.html';
+            }, 3500);
+        }
+    </script>
+</body>
+
+</html>

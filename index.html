@@ -365,17 +365,13 @@
 
     </div>
 
-    <!-- PHASE 4: THE TRIP -->
-    <div id="trip-zone">
-        <div class="tunnel"></div>
-        <div class="trip-text" id="trip-msg">Décollage...</div>
-    </div>
+
 
     <script>
         const shop = document.getElementById('fake-shop');
         const portalUi = document.getElementById('portal-ui');
         const ageCheck = document.getElementById('age-check');
-        const faqSection = document.getElementById('faq-section');
+
         const body = document.body;
 
         function handleNormalClick() {
@@ -437,35 +433,12 @@
         }
 
         function acceptAge() {
-            ageCheck.style.display = 'none';
-            startTrip();
+            window.location.href = 'boutique.html';
         }
 
         function rejectAge() {
             alert("Revenez quand vous serez plus grand ! En attendant, achetez une vraie bougie.");
             location.reload();
-        }
-
-        function startTrip() {
-            portalUi.style.display = 'none';
-            body.classList.add('trip-active');
-            
-            const messages = ["Relaxation imminente...", "Oubliez le stress...", "Bienvenue chez KAYA"];
-            const msgEl = document.getElementById('trip-msg');
-            
-            let i = 0;
-            const interval = setInterval(() => {
-                if(i < messages.length) {
-                    msgEl.innerText = messages[i];
-                    i++;
-                }
-            }, 900);
-
-            // Redirection vers le vrai site après l'animation
-            setTimeout(() => {
-                clearInterval(interval);
-                window.location.href = 'boutique.html';
-            }, 3500);
         }
     </script>
 </body>

@@ -4,9 +4,9 @@ import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, s
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_jmysMG0YAU28Zr0gE46BtNDm1gUPc0g",
-  authDomain: "kaya-cbd-11161.firebaseapp.com",
-  projectId: "kaya-cbd-11161",
-  storageBucket: "kaya-cbd-11161.firebasestorage.app",
+  authDomain: "kaya-Cannabis-11161.firebaseapp.com",
+  projectId: "kaya-Cannabis-11161",
+  storageBucket: "kaya-Cannabis-11161.firebasestorage.app",
   messagingSenderId: "837432075418",
   appId: "1:837432075418:web:e34f812b517d56d4d36b23"
 };
@@ -27,14 +27,14 @@ let currentGoalEdit = null;
 
 // ---- BADGE DEFINITIONS ----
 const BADGES = [
-  { id: 'first_order',    emoji: '🌱', name: 'Premier Pas',     desc: 'Première commande enregistrée',           check: (o) => o.length >= 1 },
-  { id: 'five_today',     emoji: '🔥', name: 'En Feu',          desc: '5 commandes en un seul jour',             check: (o) => maxOrdersInDay(o) >= 5 },
-  { id: 'total_500k',     emoji: '💰', name: 'Demi-Million',     desc: '500 000 FCFA de CA cumulé',              check: (o) => totalRevenue(o) >= 500000 },
-  { id: 'total_1m',       emoji: '💎', name: 'Diamond Dealer',   desc: '1 000 000 FCFA de CA cumulé',            check: (o) => totalRevenue(o) >= 1000000 },
-  { id: 'weekly_goal',    emoji: '🚀', name: 'Objectif Hebdo',   desc: "Objectif hebdomadaire dépassé",          check: (o) => weeklyRevenue(o) >= goals.weekly },
-  { id: 'monthly_goal',   emoji: '👑', name: 'KAYA King',        desc: "Objectif mensuel atteint",               check: (o) => monthlyRevenue(o) >= goals.monthly },
-  { id: 'ten_orders',     emoji: '📦', name: 'Logisticien',      desc: '10 commandes livrées',                   check: (o) => o.filter(x => x.status === 'delivered').length >= 10 },
-  { id: 'speed_deliver',  emoji: '⚡', name: 'Flash',            desc: '3 commandes livrées en un jour',         check: (o) => maxDeliveredInDay(o) >= 3 },
+  { id: 'first_order', emoji: '🌱', name: 'Premier Pas', desc: 'Première commande enregistrée', check: (o) => o.length >= 1 },
+  { id: 'five_today', emoji: '🔥', name: 'En Feu', desc: '5 commandes en un seul jour', check: (o) => maxOrdersInDay(o) >= 5 },
+  { id: 'total_500k', emoji: '💰', name: 'Demi-Million', desc: '500 000 FCFA de CA cumulé', check: (o) => totalRevenue(o) >= 500000 },
+  { id: 'total_1m', emoji: '💎', name: 'Diamond Dealer', desc: '1 000 000 FCFA de CA cumulé', check: (o) => totalRevenue(o) >= 1000000 },
+  { id: 'weekly_goal', emoji: '🚀', name: 'Objectif Hebdo', desc: "Objectif hebdomadaire dépassé", check: (o) => weeklyRevenue(o) >= goals.weekly },
+  { id: 'monthly_goal', emoji: '👑', name: 'KAYA King', desc: "Objectif mensuel atteint", check: (o) => monthlyRevenue(o) >= goals.monthly },
+  { id: 'ten_orders', emoji: '📦', name: 'Logisticien', desc: '10 commandes livrées', check: (o) => o.filter(x => x.status === 'delivered').length >= 10 },
+  { id: 'speed_deliver', emoji: '⚡', name: 'Flash', desc: '3 commandes livrées en un jour', check: (o) => maxDeliveredInDay(o) >= 3 },
 ];
 
 // ---- AUTH ----
@@ -68,14 +68,14 @@ document.getElementById('logoutBtn').addEventListener('click', () => signOut(aut
 async function initDashboard() {
   await loadGoals();
   subscribeOrders();
-  document.getElementById('dashboardDate').innerText = new Date().toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+  document.getElementById('dashboardDate').innerText = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
 async function loadGoals() {
   try {
     const snap = await getDoc(doc(db, 'config', 'goals'));
     if (snap.exists()) goals = { ...goals, ...snap.data() };
-  } catch(e) {}
+  } catch (e) { }
 }
 
 function subscribeOrders() {
@@ -110,7 +110,7 @@ function filterByPeriod(orders, period) {
   });
 }
 
-window.onPeriodChange = function() {
+window.onPeriodChange = function () {
   currentPeriod = document.getElementById('periodSelector').value;
   refreshAll();
 };
@@ -244,7 +244,7 @@ function renderActivityFeed() {
         <div class="activity-label">${label}</div>
         <div class="activity-time">${time}</div>
       </div>
-      <div class="activity-amount">${(o.totalAmount||0).toLocaleString('fr-FR')} FCFA</div>
+      <div class="activity-amount">${(o.totalAmount || 0).toLocaleString('fr-FR')} FCFA</div>
     </div>`;
   }).join('');
 }
@@ -252,19 +252,19 @@ function renderActivityFeed() {
 function timeAgo(date) {
   const s = Math.floor((Date.now() - date) / 1000);
   if (s < 60) return 'À l\'instant';
-  if (s < 3600) return `Il y a ${Math.floor(s/60)} min`;
-  if (s < 86400) return `Il y a ${Math.floor(s/3600)}h`;
-  return `Il y a ${Math.floor(s/86400)} jours`;
+  if (s < 3600) return `Il y a ${Math.floor(s / 60)} min`;
+  if (s < 86400) return `Il y a ${Math.floor(s / 3600)}h`;
+  return `Il y a ${Math.floor(s / 86400)} jours`;
 }
 
 // ---- OBJECTIVES ----
 function renderObjectives() {
   const now = Date.now();
-  const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0,0,0,0);
+  const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0, 0, 0, 0);
   const weekStart = now - 604800000;
 
-  const monthlyRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= monthStart.getTime()).reduce((s,o)=>s+(o.totalAmount||0),0);
-  const weeklyRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= weekStart).reduce((s,o)=>s+(o.totalAmount||0),0);
+  const monthlyRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= monthStart.getTime()).reduce((s, o) => s + (o.totalAmount || 0), 0);
+  const weeklyRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= weekStart).reduce((s, o) => s + (o.totalAmount || 0), 0);
 
   fillGoal('Monthly', monthlyRev, goals.monthly);
   fillGoal('Weekly', weeklyRev, goals.weekly);
@@ -289,7 +289,7 @@ function fillGoal(key, actual, target) {
 
   const remaining = Math.max(target - actual, 0);
   if (remaining > 0) {
-    const avgOrder = allOrders.length ? Math.round(allOrders.reduce((s,o)=>s+(o.totalAmount||0),0)/allOrders.length) : 9000;
+    const avgOrder = allOrders.length ? Math.round(allOrders.reduce((s, o) => s + (o.totalAmount || 0), 0) / allOrders.length) : 9000;
     const needed = Math.ceil(remaining / avgOrder);
     hintEl.innerText = `Il manque ${remaining.toLocaleString('fr-FR')} FCFA — soit ~${needed} commande(s) de plus !`;
   } else {
@@ -300,11 +300,11 @@ function fillGoal(key, actual, target) {
 
 function computeStreak() {
   let streak = 0;
-  const today = new Date(); today.setHours(0,0,0,0);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
   for (let i = 0; i < 30; i++) {
     const d = new Date(today); d.setDate(d.getDate() - i);
     const nextD = new Date(d); nextD.setDate(nextD.getDate() + 1);
-    const dayRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= d.getTime() && o.createdAt.toMillis() < nextD.getTime()).reduce((s,o)=>s+(o.totalAmount||0),0);
+    const dayRev = allOrders.filter(o => o.createdAt && o.createdAt.toMillis() >= d.getTime() && o.createdAt.toMillis() < nextD.getTime()).reduce((s, o) => s + (o.totalAmount || 0), 0);
     const dailyGoal = Math.round(goals.weekly / 7);
     if (dayRev >= dailyGoal) streak++;
     else if (i > 0) break;
@@ -328,7 +328,7 @@ function renderOrdersTable() {
   emptyEl.style.display = 'none';
 
   tbody.innerHTML = orders.map(o => {
-    const date = o.createdAt ? o.createdAt.toDate().toLocaleString('fr-FR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : 'N/A';
+    const date = o.createdAt ? o.createdAt.toDate().toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'N/A';
     const contact = [o.whatsapp ? `📱 ${o.whatsapp}` : '', o.telegram ? `✈️ ${o.telegram}` : ''].filter(Boolean).join('<br>') || 'N/A';
     const items = (o.items || []).map(i => `${i.qty}× ${i.name}`).join('<br>');
     const badgeClass = o.status === 'delivered' ? 'badge-delivered' : o.status === 'cancelled' ? 'badge-cancelled' : 'badge-pending';
@@ -338,9 +338,9 @@ function renderOrdersTable() {
          <button class="btn-action cancel" onclick="window.updateStatus('${o.id}','cancelled')" style="margin-left:4px">❌</button>`
       : '—';
     return `<tr>
-      <td>${date}</td><td>${contact}</td><td>${o.location||'N/A'}</td>
+      <td>${date}</td><td>${contact}</td><td>${o.location || 'N/A'}</td>
       <td><div class="items-list">${items}</div></td>
-      <td class="total-col">${(o.totalAmount||0).toLocaleString('fr-FR')} FCFA</td>
+      <td class="total-col">${(o.totalAmount || 0).toLocaleString('fr-FR')} FCFA</td>
       <td><span class="badge ${badgeClass}">${statusLabel}</span></td>
       <td>${actions}</td>
     </tr>`;
@@ -349,7 +349,7 @@ function renderOrdersTable() {
 
 window.filterOrders = renderOrdersTable;
 
-window.updateStatus = async function(id, status) {
+window.updateStatus = async function (id, status) {
   await updateDoc(doc(db, 'orders', id), { status });
 };
 
@@ -366,17 +366,17 @@ function renderProductRanking() {
   const rankEl = document.getElementById('productRanking');
   if (!rankEl) return;
   const totals = {};
-  allOrders.forEach(o => (o.items||[]).forEach(item => {
+  allOrders.forEach(o => (o.items || []).forEach(item => {
     const key = item.name.split('(')[0].trim();
     totals[key] = (totals[key] || 0) + (item.price * item.qty);
   }));
-  const sorted = Object.entries(totals).sort((a,b) => b[1]-a[1]);
-  const grand = sorted.reduce((s,[,v])=>s+v, 0) || 1;
-  const medals = ['🥇','🥈','🥉','4️⃣'];
+  const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+  const grand = sorted.reduce((s, [, v]) => s + v, 0) || 1;
+  const medals = ['🥇', '🥈', '🥉', '4️⃣'];
   rankEl.innerHTML = sorted.map(([name, rev], i) => {
-    const pct = Math.round((rev/grand)*100);
+    const pct = Math.round((rev / grand) * 100);
     return `<div class="product-rank-item">
-      <div class="rank-num">${medals[i]||'·'}</div>
+      <div class="rank-num">${medals[i] || '·'}</div>
       <div class="rank-info">
         <div class="rank-name">${name}</div>
         <div class="rank-bar-wrapper">
@@ -397,23 +397,23 @@ function renderProductChart(sorted, grand) {
   const W = canvas.parentElement.clientWidth - 48, H = 300;
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
-  const colors = ['#ffcc00','#f97316','#22c55e','#3b82f6','#a855f7'];
-  const cx = W/2, cy = H/2, r = Math.min(cx, cy) - 40;
-  let angle = -Math.PI/2;
+  const colors = ['#ffcc00', '#f97316', '#22c55e', '#3b82f6', '#a855f7'];
+  const cx = W / 2, cy = H / 2, r = Math.min(cx, cy) - 40;
+  let angle = -Math.PI / 2;
   sorted.forEach(([name, rev], i) => {
-    const slice = (rev/grand) * Math.PI * 2;
+    const slice = (rev / grand) * Math.PI * 2;
     ctx.beginPath(); ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, r, angle, angle+slice);
-    ctx.closePath(); ctx.fillStyle = colors[i%colors.length]; ctx.fill();
+    ctx.arc(cx, cy, r, angle, angle + slice);
+    ctx.closePath(); ctx.fillStyle = colors[i % colors.length]; ctx.fill();
     // Label
-    const mid = angle + slice/2;
-    const lx = cx + (r*0.65)*Math.cos(mid), ly = cy + (r*0.65)*Math.sin(mid);
+    const mid = angle + slice / 2;
+    const lx = cx + (r * 0.65) * Math.cos(mid), ly = cy + (r * 0.65) * Math.sin(mid);
     ctx.fillStyle = '#000'; ctx.font = 'bold 11px Outfit'; ctx.textAlign = 'center';
-    ctx.fillText(Math.round((rev/grand)*100)+'%', lx, ly);
+    ctx.fillText(Math.round((rev / grand) * 100) + '%', lx, ly);
     angle += slice;
   });
   // Center hole
-  ctx.beginPath(); ctx.arc(cx, cy, r*0.5, 0, Math.PI*2);
+  ctx.beginPath(); ctx.arc(cx, cy, r * 0.5, 0, Math.PI * 2);
   ctx.fillStyle = '#1c1c1c'; ctx.fill();
 }
 
@@ -431,7 +431,7 @@ function checkBadges() {
   });
   grid.innerHTML = BADGES.map(b => {
     const unlocked = unlockedBadges.has(b.id) || b.check(allOrders);
-    return `<div class="badge-card ${unlocked?'unlocked':'locked'}">
+    return `<div class="badge-card ${unlocked ? 'unlocked' : 'locked'}">
       <div class="badge-emoji">${b.emoji}</div>
       <div class="badge-name">${b.name}</div>
       <div class="badge-desc">${b.desc}</div>
@@ -455,19 +455,19 @@ function launchConfetti() {
   canvas.style.display = 'block';
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  const particles = Array.from({length:120}, () => ({
-    x: Math.random()*canvas.width, y: -20,
-    vx: (Math.random()-0.5)*4, vy: Math.random()*4+2,
-    color: ['#ffcc00','#f97316','#22c55e','#3b82f6','#ef4444'][Math.floor(Math.random()*5)],
-    r: Math.random()*6+3, rot: Math.random()*360, rSpeed: (Math.random()-0.5)*5
+  const particles = Array.from({ length: 120 }, () => ({
+    x: Math.random() * canvas.width, y: -20,
+    vx: (Math.random() - 0.5) * 4, vy: Math.random() * 4 + 2,
+    color: ['#ffcc00', '#f97316', '#22c55e', '#3b82f6', '#ef4444'][Math.floor(Math.random() * 5)],
+    r: Math.random() * 6 + 3, rot: Math.random() * 360, rSpeed: (Math.random() - 0.5) * 5
   }));
   let frame = 0;
   function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy; p.rot+=p.rSpeed;
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle = p.color; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r); ctx.restore();
+      p.x += p.vx; p.y += p.vy; p.rot += p.rSpeed;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r); ctx.restore();
     });
     frame++;
     if (frame < 150) requestAnimationFrame(draw);
@@ -477,50 +477,50 @@ function launchConfetti() {
 }
 
 // ---- GOAL MODAL ----
-window.openGoalModal = function(type) {
+window.openGoalModal = function (type) {
   currentGoalEdit = type;
   document.getElementById('goalModalTitle').innerText = type === 'monthly' ? 'Objectif Mensuel' : 'Objectif Hebdomadaire';
   document.getElementById('goalInput').value = goals[type] || '';
   document.getElementById('goalModal').classList.add('open');
 };
-window.closeGoalModal = function() { document.getElementById('goalModal').classList.remove('open'); };
-window.saveGoal = async function() {
+window.closeGoalModal = function () { document.getElementById('goalModal').classList.remove('open'); };
+window.saveGoal = async function () {
   const val = parseInt(document.getElementById('goalInput').value, 10);
   if (!val || val <= 0) return;
   goals[currentGoalEdit] = val;
-  try { await setDoc(doc(db,'config','goals'), goals); } catch(e){}
+  try { await setDoc(doc(db, 'config', 'goals'), goals); } catch (e) { }
   window.closeGoalModal();
   renderObjectives();
 };
 
 // ---- VIEW SWITCHING ----
-window.switchView = function(name, el) {
+window.switchView = function (name, el) {
   document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('view-'+name)?.classList.add('active');
+  document.getElementById('view-' + name)?.classList.add('active');
   el?.classList.add('active');
   if (name === 'products') renderProductRanking();
   if (name === 'badges') checkBadges();
 };
 
 // ---- HELPERS ----
-function totalRevenue(o) { return o.reduce((s,x)=>s+(x.totalAmount||0),0); }
+function totalRevenue(o) { return o.reduce((s, x) => s + (x.totalAmount || 0), 0); }
 function monthlyRevenue(o) {
-  const ms = new Date(); ms.setDate(1); ms.setHours(0,0,0,0);
-  return o.filter(x=>x.createdAt&&x.createdAt.toMillis()>=ms.getTime()).reduce((s,x)=>s+(x.totalAmount||0),0);
+  const ms = new Date(); ms.setDate(1); ms.setHours(0, 0, 0, 0);
+  return o.filter(x => x.createdAt && x.createdAt.toMillis() >= ms.getTime()).reduce((s, x) => s + (x.totalAmount || 0), 0);
 }
 function weeklyRevenue(o) {
-  const ws = Date.now()-604800000;
-  return o.filter(x=>x.createdAt&&x.createdAt.toMillis()>=ws).reduce((s,x)=>s+(x.totalAmount||0),0);
+  const ws = Date.now() - 604800000;
+  return o.filter(x => x.createdAt && x.createdAt.toMillis() >= ws).reduce((s, x) => s + (x.totalAmount || 0), 0);
 }
 function maxOrdersInDay(o) {
   const map = {};
-  o.forEach(x => { if(x.createdAt){ const d=x.createdAt.toDate().toDateString(); map[d]=(map[d]||0)+1; } });
+  o.forEach(x => { if (x.createdAt) { const d = x.createdAt.toDate().toDateString(); map[d] = (map[d] || 0) + 1; } });
   return Math.max(0, ...Object.values(map));
 }
 function maxDeliveredInDay(o) {
   const map = {};
-  o.filter(x=>x.status==='delivered').forEach(x => { if(x.createdAt){ const d=x.createdAt.toDate().toDateString(); map[d]=(map[d]||0)+1; } });
+  o.filter(x => x.status === 'delivered').forEach(x => { if (x.createdAt) { const d = x.createdAt.toDate().toDateString(); map[d] = (map[d] || 0) + 1; } });
   return Math.max(0, ...Object.values(map));
 }
 
