@@ -3,9 +3,9 @@ import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, s
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_jmysMG0YAU28Zr0gE46BtNDm1gUPc0g",
-  authDomain: "kaya-Cannabis-11161.firebaseapp.com",
-  projectId: "kaya-Cannabis-11161",
-  storageBucket: "kaya-Cannabis-11161.firebasestorage.app",
+  authDomain: "kaya-cbd-11161.firebaseapp.com",
+  projectId: "kaya-cbd-11161",
+  storageBucket: "kaya-cbd-11161.firebasestorage.app",
   messagingSenderId: "837432075418",
   appId: "1:837432075418:web:e34f812b517d56d4d36b23"
 };
@@ -94,7 +94,10 @@ function subscribeOrders() {
   const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'));
   onSnapshot(q, snap => {
     allOrders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    window.allOrders = allOrders; // Debug helper
     refreshAll();
+  }, err => {
+    console.error("Firestore onSnapshot error:", err);
   });
 }
 
@@ -342,7 +345,9 @@ function renderOrdersTable() {
   tbody.innerHTML = orders.map(o => {
     const date = o.createdAt ? o.createdAt.toDate().toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'N/A';
     const contact = [o.whatsapp ? `📱 ${o.whatsapp}` : '', o.telegram ? `✈️ ${o.telegram}` : ''].filter(Boolean).join('<br>') || 'N/A';
-    const items = (o.items || []).map(i => `${i.qty}× ${i.name}`).join('<br>');
+    const items = o.items && o.items.length 
+      ? o.items.map(i => `${i.qty}× ${i.name}`).join('<br>') 
+      : (o.product ? `1× ${o.product}` : 'N/A');
     const badgeClass = o.status === 'delivered' ? 'badge-delivered' : o.status === 'cancelled' ? 'badge-cancelled' : 'badge-pending';
     const statusLabel = o.status === 'delivered' ? 'Livrée' : o.status === 'cancelled' ? 'Annulée' : 'En attente';
     const actions = o.status === 'pending'
@@ -381,10 +386,17 @@ function renderProductRanking() {
   const rankEl = document.getElementById('productRanking');
   if (!rankEl) return;
   const totals = {};
-  allOrders.forEach(o => (o.items || []).forEach(item => {
-    const key = item.name.split('(')[0].trim();
-    totals[key] = (totals[key] || 0) + (item.price * item.qty);
-  }));
+  allOrders.forEach(o => {
+    if (o.items && o.items.length) {
+      o.items.forEach(item => {
+        const key = item.name.split('(')[0].trim();
+        totals[key] = (totals[key] || 0) + (item.price * item.qty);
+      });
+    } else if (o.product) {
+      const key = o.product.split('(')[0].trim();
+      totals[key] = (totals[key] || 0) + (o.totalAmount || 0);
+    }
+  });
   const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
   const grand = sorted.reduce((s, [, v]) => s + v, 0) || 1;
   const medals = ['🥇', '🥈', '🥉', '4️⃣'];

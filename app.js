@@ -1,9 +1,8 @@
-// Configuration Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyC_jmysMG0YAU28Zr0gE46BtNDm1gUPc0g",
-  authDomain: "kaya-Cannabis-11161.firebaseapp.com",
-  projectId: "kaya-Cannabis-11161",
-  storageBucket: "kaya-Cannabis-11161.firebasestorage.app",
+  authDomain: "kaya-cbd-11161.firebaseapp.com",
+  projectId: "kaya-cbd-11161",
+  storageBucket: "kaya-cbd-11161.firebasestorage.app",
   messagingSenderId: "837432075418",
   appId: "1:837432075418:web:e34f812b517d56d4d36b23"
 };
