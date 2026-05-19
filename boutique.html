@@ -49,9 +49,6 @@
       <div class="header-actions">
         <button class="icon-btn search-icon">🔍</button>
         <button class="icon-btn account-icon">👤</button>
-        <button class="btn-cart" id="cartBtn" onclick="toggleCart()">
-          🛍️ <span class="cart-count" id="cartCount">0</span>
-        </button>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
       </div>
     </div>
@@ -148,10 +145,8 @@
               </div>
 
               <div class="card-actions">
-                <a href="https://payme.neero.io/payment?token=09d92378-44ff-4fae-90ac-200eb0077b1c" target="_blank"
-                  class="btn-buy-now" id="buy-semaine">⚡ ACHETER</a>
-                <button class="btn-add-cart" onclick="addFromCard('semaine', 'PACK SEMAINE KAYA', this)">🛒
-                  PANIER</button>
+                <button class="btn-buy-now" id="buy-semaine"
+                  onclick="openCheckout('PACK SEMAINE KAYA', 9000, 'semaine')">⚡ ACHETER</button>
               </div>
             </div>
           </div>
@@ -189,10 +184,8 @@
               </div>
 
               <div class="card-actions">
-                <a href="https://payme.neero.io/payment?token=5304de6e-6b81-40f1-98db-c08de145ad5d" target="_blank"
-                  class="btn-buy-now" id="buy-fleur">⚡ ACHETER</a>
-                <button class="btn-add-cart" onclick="addFromCard('fleur', 'POCHON FLEURS PREMIUM', this)">🛒
-                  PANIER</button>
+                <button class="btn-buy-now" id="buy-fleur" data-product-id="fleur"
+                  onclick="openCheckout('POCHON FLEURS PREMIUM', 8000, 'fleur')">⚡ ACHETER</button>
               </div>
             </div>
           </div>
@@ -228,9 +221,8 @@
               </div>
 
               <div class="card-actions">
-                <a href="https://payme.neero.io/payment?token=0075606e-4a01-46f6-bd57-04abc31bd82a" target="_blank"
-                  class="btn-buy-now" id="buy-chill">⚡ ACHETER</a>
-                <button class="btn-add-cart" onclick="addFromCard('chill', 'PACK CHILL KAYA', this)">🛒 PANIER</button>
+                <button class="btn-buy-now" id="buy-chill"
+                  onclick="openCheckout('PACK CHILL KAYA', 17000, 'chill')">⚡ ACHETER</button>
               </div>
             </div>
           </div>
@@ -267,9 +259,8 @@
               </div>
 
               <div class="card-actions">
-                <a href="https://payme.neero.io/payment?token=e747bef7-d76d-416c-b2ec-2d917e67a24b" target="_blank"
-                  class="btn-buy-now" id="buy-party">⚡ ACHETER</a>
-                <button class="btn-add-cart" onclick="addFromCard('party', 'PARTY PACK KAYA', this)">🛒 PANIER</button>
+                <button class="btn-buy-now" id="buy-party"
+                  onclick="openCheckout('PARTY PACK KAYA', 40000, 'party')">⚡ ACHETER</button>
               </div>
             </div>
           </div>
@@ -443,56 +434,45 @@
     </div>
   </footer>
 
-  <!-- CART DRAWER -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3>🛒 Mon Panier</h3>
-      <button onclick="toggleCart()" class="cart-close">✕</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <p class="cart-empty">Votre panier est vide.</p>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">TOTAL : <strong id="cartTotal" class="yellow">0 FCFA</strong></div>
-      <button class="btn-checkout-solid" id="checkoutBtn" onclick="checkout()">VALIDER MA COMMANDE 🚀</button>
-    </div>
-  </div>
+
 
   <!-- MODAL CHECKOUT FORM -->
   <div class="modal-overlay" id="checkoutModalOverlay">
     <div class="modal-card" style="padding-top: 40px; position: relative;">
       <button onclick="closeCheckoutModal()" class="cart-close"
         style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #fff;">✕</button>
-      <div class="modal-icon">🚚</div>
-      <h3 class="modal-title">VALIDER LA COMMANDE</h3>
-      <p class="modal-text">Remplissez vos informations pour une livraison discrète.</p>
+      <div class="modal-icon">🛒</div>
+      <h3 class="modal-title">FINALISER MA COMMANDE</h3>
 
-      <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left; margin-top: 20px;">
+      <!-- Résumé produit -->
+      <div style="background: rgba(255,204,0,0.12); border: 1px solid rgba(255,204,0,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; text-align: left;">
+        <p style="margin:0; font-size:0.85rem; color:#aaa;">Produit sélectionné</p>
+        <p id="checkoutProductName" style="margin:4px 0 0; font-weight:700; font-size:1rem; color:#fff;">—</p>
+        <p id="checkoutProductPrice" style="margin:2px 0 0; font-weight:800; font-size:1.1rem; color:#ffcc00;">—</p>
+      </div>
+
+      <p class="modal-text" style="margin-bottom:18px;">Renseignez vos infos de livraison. Vous serez ensuite redirigé vers la page de paiement sécurisé.</p>
+
+      <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left;">
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Lieu de livraison
-            *</label>
-          <input type="text" id="deliveryLocation" placeholder="ex: omnisports, yaoundé" required
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📍 Lieu de livraison *</label>
+          <input type="text" id="deliveryLocation" placeholder="ex: Omnisports, Yaoundé" required
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
 
-        <div
-          style="background: rgba(255, 204, 0, 0.1); border: 1px solid rgba(255, 204, 0, 0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.4;">Veuillez remplir au moins
-            <strong>un</strong> des deux champs de contact ci-dessous. <br><span style="color: #ffcc00;">Pour plus
-              d'anonymat, le @Telegram est recommandé.</span>
-          </p>
+        <div style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.5;">Remplissez au moins <strong>un</strong> champ de contact.<br>
+            <span style="color: #ffcc00;">Le @Telegram garantit plus d'anonymat.</span></p>
         </div>
 
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Numéro
-            WhatsApp</label>
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📱 Numéro WhatsApp</label>
           <input type="text" id="contactWhatsApp" placeholder="ex: 6 XX XX XX XX"
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">@Telegram</label>
+        <div class="form-group" style="margin-bottom: 22px;">
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">✈️ @Telegram</label>
           <input type="text" id="contactTelegram" placeholder="ex: @monpseudo"
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
@@ -500,7 +480,7 @@
         <p id="checkoutError" style="color: #ff4d4d; font-size: 0.85rem; margin-bottom: 15px; display: none;"></p>
 
         <button type="submit" class="btn-yellow-solid" id="submitOrderBtn"
-          style="width: 100%; justify-content: center;">CONFIRMER MA COMMANDE</button>
+          style="width: 100%; justify-content: center; font-size: 1rem;">PASSER AU PAIEMENT →</button>
       </form>
     </div>
   </div>
