@@ -68,10 +68,13 @@ document.getElementById('adminPassword').addEventListener('keydown', (e) => {
   }
 });
 
-document.getElementById('logoutBtn').addEventListener('click', () => {
+window.logout = function () {
   sessionStorage.removeItem('adminLoggedIn');
   checkLocalAuth();
-});
+};
+window.checkLocalAuth = checkLocalAuth;
+
+document.getElementById('logoutBtn').addEventListener('click', window.logout);
 
 // ---- INIT ----
 async function initDashboard() {
@@ -364,10 +367,13 @@ window.updateStatus = async function (id, status) {
 
 function updatePendingBadge() {
   const cnt = allOrders.filter(o => o.status === 'pending').length;
-  const el = document.getElementById('pendingBadge');
-  if (!el) return;
-  el.style.display = cnt > 0 ? 'inline-block' : 'none';
-  el.innerText = cnt;
+  ['pendingBadge', 'pendingBadgeMobile'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = cnt > 0 ? 'inline-block' : 'none';
+      el.innerText = cnt;
+    }
+  });
 }
 
 // ---- PRODUCTS ----
@@ -505,9 +511,12 @@ window.saveGoal = async function () {
 // ---- VIEW SWITCHING ----
 window.switchView = function (name, el) {
   document.querySelectorAll('.content-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('view-' + name)?.classList.add('active');
-  el?.classList.add('active');
+
+  // Sync active states on sidebar and bottom nav
+  document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll(`[data-view="${name}"]`).forEach(n => n.classList.add('active'));
+
   if (name === 'products') renderProductRanking();
   if (name === 'badges') checkBadges();
 };

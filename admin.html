@@ -244,6 +244,33 @@
         </div>
 
     </main>
+
+    <!-- Bottom Nav for Mobile -->
+    <nav class="bottom-nav">
+      <a href="#" class="bottom-nav-item active" data-view="dashboard" onclick="switchView('dashboard', this)">
+        <span class="bottom-nav-icon">📊</span>
+        <span class="bottom-nav-label">Stats</span>
+      </a>
+      <a href="#" class="bottom-nav-item" data-view="orders" onclick="switchView('orders', this)">
+        <span class="bottom-nav-icon" style="position: relative;">
+          🛒
+          <span class="nav-badge" id="pendingBadgeMobile" style="display:none; position: absolute; top: -5px; right: -10px; margin: 0; background: var(--red); color: #fff; font-size: 0.65rem; padding: 2px 5px; border-radius: 10px; min-width: 15px; text-align: center;">0</span>
+        </span>
+        <span class="bottom-nav-label">Commandes</span>
+      </a>
+      <a href="#" class="bottom-nav-item" data-view="products" onclick="switchView('products', this)">
+        <span class="bottom-nav-icon">📦</span>
+        <span class="bottom-nav-label">Produits</span>
+      </a>
+      <a href="#" class="bottom-nav-item" data-view="badges" onclick="switchView('badges', this)">
+        <span class="bottom-nav-icon">🏆</span>
+        <span class="bottom-nav-label">Badges</span>
+      </a>
+      <a href="#" class="bottom-nav-item" onclick="logout()" style="color: var(--red);">
+        <span class="bottom-nav-icon">🚪</span>
+        <span class="bottom-nav-label">Quitter</span>
+      </a>
+    </nav>
   </div>
 
   <!-- GOAL EDIT MODAL -->

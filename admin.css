@@ -475,6 +475,10 @@ a { text-decoration: none; }
 ::-webkit-scrollbar-thumb:hover { background: #444; }
 
 /* Responsive Settings */
+.bottom-nav {
+  display: none;
+}
+
 @media (max-width: 1100px) {
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .chart-activity-row { grid-template-columns: 1fr; }
@@ -484,31 +488,154 @@ a { text-decoration: none; }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --sidebar-w: 68px;
+  .sidebar {
+    display: none !important;
   }
-  .sidebar { width: var(--sidebar-w); }
-  .sidebar-header, 
-  .nav-item span:not(.nav-icon), 
-  .admin-email, 
-  .btn-logout { 
-    display: none; 
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    z-index: 999;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
   }
-  .nav-item { justify-content: center; padding: 16px; }
-  .topbar { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
-  .topbar h2 { font-size: 1.15rem; }
-  .view-body { padding: 16px 20px; gap: 14px; }
-  .table-container { padding: 16px 20px; }
-  .products-content { padding: 16px 20px; }
-  .badges-grid { padding: 16px 20px; }
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 500;
+    flex: 1;
+    height: 100%;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .bottom-nav-item.active {
+    color: var(--yellow);
+  }
+  .bottom-nav-icon {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+  }
+  .bottom-nav-label {
+    font-size: 0.65rem;
+  }
+  .main-area {
+    width: 100vw;
+    height: calc(100vh - 60px - env(safe-area-inset-bottom));
+  }
+  .view-container {
+    flex-direction: column;
+  }
+  
+  .topbar {
+    padding: 12px 18px;
+  }
+  .topbar h2 {
+    font-size: 1.15rem;
+  }
+  .view-body {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .table-container {
+    padding: 12px 16px;
+  }
+  .products-content {
+    padding: 12px 16px;
+    grid-template-columns: 1fr;
+  }
+  .badges-grid {
+    padding: 12px 16px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .badge-card {
+    padding: 16px 12px;
+  }
+  .badge-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  .badge-name {
+    font-size: 0.82rem;
+  }
+  .badge-desc {
+    font-size: 0.7rem;
+  }
+  .chart-card, .activity-card {
+    padding: 12px;
+  }
+  .chart-activity-row {
+    gap: 12px;
+  }
+  .orders-table th, .orders-table td {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 520px) {
-  .kpi-grid { grid-template-columns: 1fr; }
-  .objectives-row { grid-template-columns: 1fr; }
-  .topbar { flex-direction: column; align-items: flex-start; }
-  .topbar-actions { width: 100%; }
-  .period-select { width: 100%; text-align: center; }
-  .kpi-card { padding: 14px; }
-  .kpi-value { font-size: 1.2rem; }
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .kpi-card {
+    padding: 12px;
+    gap: 8px;
+  }
+  .kpi-icon {
+    font-size: 1.4rem;
+  }
+  .kpi-value {
+    font-size: 1.1rem;
+  }
+  .kpi-label {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+  }
+  .kpi-delta {
+    font-size: 0.7rem;
+  }
+  .objectives-row {
+    grid-template-columns: 1fr;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .objective-card {
+    padding: 14px;
+  }
+  .goal-amount-row {
+    font-size: 0.95rem;
+  }
+  
+  .topbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar-actions {
+    width: auto;
+  }
+  .period-select {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .login-box {
+    padding: 32px 24px;
+    width: 92%;
+  }
+  .login-logo {
+    font-size: 1.8rem;
+  }
 }
