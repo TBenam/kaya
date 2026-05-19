@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -12,11 +11,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-
-const ALLOWED_EMAIL = "stabakagency@gmail.com";
 
 // ---- STATE ----
 let allOrders = [];
@@ -38,31 +33,45 @@ const BADGES = [
 ];
 
 // ---- AUTH ----
-onAuthStateChanged(auth, user => {
-  if (user && user.email === ALLOWED_EMAIL) {
+function checkLocalAuth() {
+  if (sessionStorage.getItem('adminLoggedIn') === 'true') {
     document.getElementById('dashboardView').classList.add('active');
     document.getElementById('loginView').classList.remove('active');
-    document.getElementById('adminEmail').innerText = user.email;
+    document.getElementById('adminEmail').innerText = "admin@kaya.local";
     initDashboard();
-  } else if (user) {
-    signOut(auth).then(() => { document.getElementById('loginError').innerText = "Accès refusé."; });
   } else {
     document.getElementById('loginView').classList.add('active');
     document.getElementById('dashboardView').classList.remove('active');
   }
-});
+}
+
+// Check auth state immediately on load
+checkLocalAuth();
 
 // LOGIN ACTION
-document.getElementById('googleLoginBtn').addEventListener('click', () => {
-  document.getElementById('loginError').innerText = "";
-  signInWithPopup(auth, provider)
-    .catch((error) => {
-      console.error("Firebase Login Error details:", error);
-      document.getElementById('loginError').innerText = `Erreur de connexion : ${error.code || error.message}`;
-    });
+document.getElementById('loginBtn').addEventListener('click', () => {
+  const password = document.getElementById('adminPassword').value;
+  const errorEl = document.getElementById('loginError');
+  if (password === 'kaya-stabak') {
+    errorEl.innerText = "";
+    sessionStorage.setItem('adminLoggedIn', 'true');
+    checkLocalAuth();
+  } else {
+    errorEl.innerText = "Mot de passe incorrect.";
+  }
 });
 
-document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+// Bind Enter key to login
+document.getElementById('adminPassword').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('loginBtn').click();
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('adminLoggedIn');
+  checkLocalAuth();
+});
 
 // ---- INIT ----
 async function initDashboard() {
