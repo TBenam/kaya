@@ -1,5 +1,5 @@
 const fs = require('fs');
-let html = fs.readFileSync('index.html', 'utf8');
+let html = fs.readFileSync('boutique.html', 'utf8');
 
 const mapping = {
   'start': 'pack-start',
@@ -33,7 +33,7 @@ const manualReplace = [
   { id: 'fleur10g', slug: 'fleur-10g', title: 'Pochon 10 Grammes' }
 ];
 
-let newHtml = fs.readFileSync('index.html', 'utf8');
+let newHtml = fs.readFileSync('boutique.html', 'utf8');
 
 manualReplace.forEach(p => {
   // Replace <div class="product-img-wrap"> with <a href="..." ...> inside the specific card
@@ -48,5 +48,5 @@ manualReplace.forEach(p => {
   }
 });
 
-fs.writeFileSync('index.html', newHtml);
+fs.writeFileSync('boutique.html', newHtml);
 console.log('index.html updated with links');

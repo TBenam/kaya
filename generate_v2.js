@@ -1,5 +1,5 @@
 const fs = require('fs');
-let indexHtml = fs.readFileSync('index.html', 'utf8');
+let indexHtml = fs.readFileSync('boutique.html', 'utf8');
 
 const products = [
   { id: 'start', slug: 'pack-start', title: 'PACK START KAYA', img: 'images/imagespack_start.png', badge: 'DECOUVERTE', tags: ['CBD 12%', 'GreenHouse', 'Initiation'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, price: 5000, options: '<option value="5" data-price="5000">5 joints (1000F/u) - 5 000F</option>' },
@@ -10,7 +10,7 @@ const products = [
 ];
 
 const header = indexHtml.split('<section class="hero-banner"')[0];
-let headerHtml = header.replace(/href="#/g, 'href="index.html#');
+let headerHtml = header.replace(/href="#/g, 'href="boutique.html#');
 
 const footer = '<section class="footer-reviews">' + indexHtml.split('<section class="footer-reviews">')[1];
 
@@ -19,7 +19,7 @@ products.forEach(p => {
 <!-- PRODUCT DETAIL SECTION -->
 <section class="tops-ventes" style="padding: 150px 0 80px;">
   <div class="container">
-    <a href="index.html" class="yellow" style="text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
+    <a href="boutique.html" class="yellow" style="text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: start;">
       

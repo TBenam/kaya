@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const indexHtml = fs.readFileSync('index.html', 'utf8');
+const indexHtml = fs.readFileSync('boutique.html', 'utf8');
 
 const products = [
   { id: 'start', slug: 'pack-start', name: 'Pack "Start" – 5 joints', price: 5000, oldPrice: '', img: 'images/pack_start.png', badge: 'Entrée de Gamme', stars: '★★★★★', specs: ['🍀 CBD : 12%', '🏡 Culture : GreenHouse', '✨ Effet : Chill'], desc: `Découvrez notre pack d'initiation. 5 joints de qualité pré-roulés avec amour. Idéal pour une première expérience douce et agréable.`, unit: '1 000F / joint' },
@@ -22,7 +22,7 @@ products.forEach(p => {
 <!-- PRODUCT DETAIL -->
 <section class="product-detail-section" style="padding: 120px 0 80px; min-height: 80vh;">
   <div class="container">
-    <a href="index.html" style="color: var(--gold); text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
+    <a href="boutique.html" style="color: var(--gold); text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
     <div class="product-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
       
       <div class="product-detail-img-wrap" style="background: var(--dark2); border-radius: 12px; border: 1px solid rgba(255,209,1,0.2); padding: 40px; text-align: center; position: relative;">
@@ -61,7 +61,7 @@ products.forEach(p => {
   `;
   
   // replace nav links in header to use absolute 'index.html#...'
-  let headerHtml = header.replace(/href="#/g, 'href="index.html#');
+  let headerHtml = header.replace(/href="#/g, 'href="boutique.html#');
   
   // Update the title
   headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${p.name} - KAYA Premium CBD</title>`);

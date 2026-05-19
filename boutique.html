@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Party Pack – 50 joints - KAYA Premium CBD</title>
+  <title>KAYA – Le Cannabis Légal Premium au Cameroun</title>
   <meta name="description" content="KAYA : L'expérience CBD premium de qualité supérieure. Livraison anonyme sous 2H à Douala et Yaoundé."/>
   
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <!-- Polices ultra-bold pour les titres (Syne) et claires pour le texte (Outfit) -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet"/>
+  <!-- Polices claires (Outfit) et géométriques modernes pour les titres (Plus Jakarta Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -30,16 +30,16 @@
 <!-- HEADER -->
 <header class="header" id="header">
   <div class="container header-inner">
-    <a href="boutique.html#" class="logo">
+    <a href="#" class="logo">
       <span class="logo-kaya">KAYA</span>
       <span class="logo-dot">CBD</span>
     </a>
     <nav class="nav" id="nav">
-      <a href="boutique.html#accueil" onclick="closeMenu()">Produits ▾</a>
-      <a href="boutique.html#mission" class="highlight-link" onclick="closeMenu()">Get High</a>
-      <a href="boutique.html#rappeurs" onclick="closeMenu()">Kaya Club ▾</a>
-      <a href="boutique.html#fleurs" onclick="closeMenu()">CBD ▾</a>
-      <a href="boutique.html#faq" onclick="closeMenu()">Aide et Suivi ▾</a>
+      <a href="produits.html" onclick="closeMenu()">Produits ▾</a>
+      <a href="#mission" class="highlight-link" onclick="closeMenu()">Get High</a>
+      <a href="#rappeurs" onclick="closeMenu()">Kaya Club ▾</a>
+      <a href="#fleurs" onclick="closeMenu()">CBD ▾</a>
+      <a href="#faq" onclick="closeMenu()">Aide et Suivi ▾</a>
     </nav>
     <div class="header-actions">
       <button class="icon-btn search-icon">🔍</button>
@@ -74,8 +74,6 @@
       </div>
     </div>
   </div>
-  
-  <a href="https://t.me/KayaSupportBot" target="_blank" class="hero-whatsapp-btn">💬</a>
 </section>
 
 <!-- TICKER MARQUEE (Yellow background) -->
@@ -101,7 +99,7 @@
         <p class="section-desc">Experts en CBD, nous l'avons soigneusement sélectionné les meilleures fleurs de CBD, hash, huiles, pré-roulés et concentrés. Notre objectif est de t'offrir une expérience de relaxation optimale tout en améliorant ton bien-être au quotidien, dans le respect le plus strict de la légalité.</p>
       </div>
       <div class="header-action-block">
-        <a href="boutique.html#fleurs" class="btn-yellow-solid">VOIR PLUS DE PRODUITS</a>
+        <a href="produits.html" class="btn-yellow-solid">VOIR PLUS DE PRODUITS</a>
       </div>
     </div>
 
@@ -111,9 +109,9 @@
       <!-- Product 1: Pack Semaine -->
       <div class="card-product">
         <div class="card-badge">BESTSELLER</div>
-        <div class="card-image-box">
+        <a href="produit-semaine.html" style="display:block;"><div class="card-image-box">
           <img src="images/imagespack_semaine.png" alt="Pack Semaine" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='🌿';">
-        </div>
+        </div></a>
         <div class="card-content">
           <h3 class="card-title">PACK SEMAINE KAYA</h3>
           <div class="card-rating">
@@ -124,7 +122,11 @@
             <span class="tag">Indoor</span>
             <span class="tag">Chill</span>
           </div>
-          
+          <div class="card-scarcity">🔥 Plus que 4 en stock !</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">9 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
           <div class="card-selector">
             <select class="variant-select" data-id="semaine" onchange="updateCardPrice(this)">
               <option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option>
@@ -132,16 +134,19 @@
             </select>
           </div>
           
-          <button class="btn-add-cart" onclick="addFromCard('semaine', 'PACK SEMAINE KAYA', this)">AJOUTER AU PANIER</button>
+          <div class="card-actions">
+            <a href="https://payme.neero.io/payment?token=09d92378-44ff-4fae-90ac-200eb0077b1c" target="_blank" class="btn-buy-now" id="buy-semaine">⚡ ACHETER</a>
+            <button class="btn-add-cart" onclick="addFromCard('semaine', 'PACK SEMAINE KAYA', this)">🛒 PANIER</button>
+          </div>
         </div>
       </div>
 
       <!-- Product 2: Pochon 5g -->
       <div class="card-product">
         <div class="card-badge">BESTSELLER</div>
-        <div class="card-image-box">
+        <a href="produit-fleur.html" style="display:block;"><div class="card-image-box">
           <img src="images/imagesfleur_5g.png" alt="Pochon 5g" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='💎';">
-        </div>
+        </div></a>
         <div class="card-content">
           <h3 class="card-title">POCHON FLEURS PREMIUM</h3>
           <div class="card-rating">
@@ -151,7 +156,11 @@
             <span class="tag">CBD 24%</span>
             <span class="tag">Purple Punch</span>
           </div>
-          
+          <div class="card-scarcity">⚡ Forte demande - 7 personnes regardent</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">8 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
           <div class="card-selector">
             <select class="variant-select" data-id="fleur" onchange="updateCardPrice(this)">
               <option value="5g" data-price="8000">5g (1600F/g) - 8 000F</option>
@@ -160,16 +169,19 @@
             </select>
           </div>
           
-          <button class="btn-add-cart" onclick="addFromCard('fleur', 'POCHON FLEURS PREMIUM', this)">AJOUTER AU PANIER</button>
+          <div class="card-actions">
+            <a href="https://payme.neero.io/payment?token=5304de6e-6b81-40f1-98db-c08de145ad5d" target="_blank" class="btn-buy-now" id="buy-fleur">⚡ ACHETER</a>
+            <button class="btn-add-cart" onclick="addFromCard('fleur', 'POCHON FLEURS PREMIUM', this)">🛒 PANIER</button>
+          </div>
         </div>
       </div>
 
       <!-- Product 3: Pack Chill -->
       <div class="card-product">
         <div class="card-badge">BESTSELLER</div>
-        <div class="card-image-box">
+        <a href="produit-chill.html" style="display:block;"><div class="card-image-box">
           <img src="images/imagespack_chill.png" alt="Pack Chill" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='✨';">
-        </div>
+        </div></a>
         <div class="card-content">
           <h3 class="card-title">PACK CHILL KAYA</h3>
           <div class="card-rating">
@@ -179,14 +191,21 @@
             <span class="tag">CBD 18%</span>
             <span class="tag">Relax</span>
           </div>
-          
+          <div class="card-scarcity">🔥 Presque en rupture - 2 restants</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">17 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
           <div class="card-selector">
             <select class="variant-select" data-id="chill" onchange="updateCardPrice(this)">
               <option value="20" data-price="17000">20 joints (850F/u) - 17 000F</option>
             </select>
           </div>
           
-          <button class="btn-add-cart" onclick="addFromCard('chill', 'PACK CHILL KAYA', this)">AJOUTER AU PANIER</button>
+          <div class="card-actions">
+            <a href="https://payme.neero.io/payment?token=0075606e-4a01-46f6-bd57-04abc31bd82a" target="_blank" class="btn-buy-now" id="buy-chill">⚡ ACHETER</a>
+            <button class="btn-add-cart" onclick="addFromCard('chill', 'PACK CHILL KAYA', this)">🛒 PANIER</button>
+          </div>
         </div>
       </div>
 
@@ -194,9 +213,9 @@
       <div class="card-product">
         <div class="card-badge-promo">NEW</div>
         <div class="card-badge" style="left:54px;">PROMO</div>
-        <div class="card-image-box">
+        <a href="produit-party.html" style="display:block;"><div class="card-image-box">
           <img src="images/imagespack_party.png" alt="Party Pack" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='🎉';">
-        </div>
+        </div></a>
         <div class="card-content">
           <h3 class="card-title">PARTY PACK KAYA</h3>
           <div class="card-rating">
@@ -206,14 +225,21 @@
             <span class="tag">CBD 20%</span>
             <span class="tag">Gros Volume</span>
           </div>
-          
+          <div class="card-scarcity">⚡ Offre Limitée - Économisez 5 000F</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">40 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
           <div class="card-selector">
             <select class="variant-select" data-id="party" onchange="updateCardPrice(this)">
               <option value="50" data-price="40000">50 joints (800F/u) - 40 000F</option>
             </select>
           </div>
           
-          <button class="btn-add-cart" onclick="addFromCard('party', 'PARTY PACK KAYA', this)">AJOUTER AU PANIER</button>
+          <div class="card-actions">
+            <a href="https://payme.neero.io/payment?token=e747bef7-d76d-416c-b2ec-2d917e67a24b" target="_blank" class="btn-buy-now" id="buy-party">⚡ ACHETER</a>
+            <button class="btn-add-cart" onclick="addFromCard('party', 'PARTY PACK KAYA', this)">🛒 PANIER</button>
+          </div>
         </div>
       </div>
 
@@ -254,15 +280,7 @@
           <div class="rapper-name">#Tenor</div>
         </div>
       </div>
-      <!-- Placeholder for others -->
-      <div class="rapper-card">
-        <div class="rapper-img-wrapper">
-          <div class="rapper-placeholder">
-            <span class="placeholder-icon">🎵</span>
-          </div>
-          <div class="rapper-name">#Guest</div>
-        </div>
-      </div>
+      <!-- Plus de collaborations à venir -->
     </div>
   </div>
 </section>
@@ -281,7 +299,7 @@
   <div class="container benefits-container">
     <div class="benefits-text-side">
       <h2 class="section-title">LE <span class="yellow">CBD,</span> DES <span class="yellow">BIENFAITS<br/>DURABLES</span></h2>
-      <p class="section-desc">Le CBD offre de nombreux bienfaits pour le bien-être au quotidien. Il peut aider à soulager l'anxiété, le stress et les douleurs chroniques, favorisant ainsi une sensation de calme et de... <a href="boutique.html#" class="yellow link-more">Voir plus</a></p>
+      <p class="section-desc">Le CBD offre de nombreux bienfaits pour le bien-être au quotidien. Il peut aider à soulager l'anxiété, le stress et les douleurs chroniques, favorisant ainsi une sensation de calme et de... <a href="#" class="yellow link-more">Voir plus</a></p>
       
       <div class="benefits-features">
         <div class="feature-item">
@@ -300,12 +318,12 @@
     </div>
     
     <div class="benefits-visual-side">
-      <!-- Placeholder rounded card matching Golden CBD's right side -->
-      <div class="benefits-card-placeholder">
-        <div class="benefits-card-inner">
-           <!-- You can place an image or video here -->
-           <img src="images/imagespack_start.png" alt="Kaya Quality" onerror="this.style.display='none';">
-        </div>
+      <div class="benefits-cta-card">
+        <h3>LIVRAISON EN 2 HEURES CHRONO</h3>
+        <p>Commandez vos produits en toute discrétion. Nos livreurs vous livrent directement sous pli anonyme à Douala et Yaoundé.</p>
+        <div class="cta-promo-badge">LIVRAISON DISCRÈTE ET ANONYME</div>
+        <a href="produits.html" class="btn-yellow-solid cta-btn">DÉCOUVRIR LE CATALOGUE</a>
+        <a href="https://t.me/KayaSupportBot" target="_blank" class="btn-telegram-cta">💬 DISCUTER SUR TELEGRAM</a>
       </div>
     </div>
   </div>
@@ -353,17 +371,17 @@
     </div>
     <div class="footer-links">
       <h4>BOUTIQUE</h4>
-      <a href="boutique.html#accueil">Fleurs</a>
-      <a href="boutique.html#pre-roules">Pré-roulés</a>
-      <a href="boutique.html#resines">Résines</a>
-      <a href="boutique.html#accessoires">Accessoires</a>
+      <a href="#accueil">Fleurs</a>
+      <a href="#pre-roules">Pré-roulés</a>
+      <a href="#resines">Résines</a>
+      <a href="#accessoires">Accessoires</a>
     </div>
     <div class="footer-links">
       <h4>LÉGAL</h4>
-      <a href="boutique.html#">Conditions de Livraison</a>
-      <a href="boutique.html#">Politique de Confidentialité</a>
-      <a href="boutique.html#">Mentions Légales</a>
-      <a href="boutique.html#">Suivi de commande</a>
+      <a href="#">Conditions de Livraison</a>
+      <a href="#">Politique de Confidentialité</a>
+      <a href="#">Mentions Légales</a>
+      <a href="#">Suivi de commande</a>
     </div>
     <div class="footer-contact">
       <h4>NOUS CONTACTER</h4>
@@ -439,44 +457,3 @@
 <script type="module" src="app.js"></script>
 </body>
 </html>
-
-<!-- PRODUCT DETAIL -->
-<section class="product-detail-section" style="padding: 120px 0 80px; min-height: 80vh;">
-  <div class="container">
-    <a href="boutique.html" style="color: var(--gold); text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
-    <div class="product-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
-      
-      <div class="product-detail-img-wrap" style="background: var(--dark2); border-radius: 12px; border: 1px solid rgba(255,209,1,0.2); padding: 40px; text-align: center; position: relative;">
-        <div class="product-badge" style="position: absolute; top: 20px; left: 20px; background: var(--gold); color: #000; padding: 6px 12px; border-radius: 4px; font-weight: 900;">Gros Volume</div>
-        <img src="images/pack_party.png" alt="Party Pack – 50 joints" style="width: 100%; max-width: 400px; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
-        <div class="fallback-product-img" style="display: none; height: 300px; background: linear-gradient(135deg, #121212, #242422); align-items: center; justify-content: center; font-size: 4rem; color: rgba(255,255,255,0.8); border-radius: 8px; flex-direction: column;">📦<span style="font-size: 1rem; color: var(--gold); margin-top: 10px; font-weight: 900;">KAYA PREMIUM</span></div>
-      </div>
-      
-      <div class="product-detail-info">
-        <h1 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); color: #fff; margin-bottom: 15px;">Party Pack – 50 joints</h1>
-        <div class="product-stars" style="color: var(--gold); font-size: 1.2rem; margin-bottom: 20px;">★★★★★ <span style="color: var(--text2); font-size: 0.9rem;">(120+ avis)</span></div>
-        
-        <div class="product-price-row" style="display: flex; align-items: baseline; gap: 15px; margin-bottom: 30px;">
-          <span class="product-price" style="font-size: 2.2rem; font-weight: 900; color: var(--gold);">40 000 <small style="font-size: 1rem;">FCFA</small></span>
-          <span class="product-unit old-price">50 000F</span>
-        </div>
-        
-        <p style="color: var(--text2); font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px;">Parfait pour vos événements ou pour faire des réserves. 50 joints Premium, roulés à la perfection, offrant un effet festif et convivial exceptionnel.</p>
-        
-        <div class="product-spec-badges" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;">
-          <span class="spec-badge" style="font-size: 0.85rem; padding: 8px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text);">🍀 CBD : 20%</span><span class="spec-badge" style="font-size: 0.85rem; padding: 8px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text);">👑 Culture : Premium Indoor</span><span class="spec-badge" style="font-size: 0.85rem; padding: 8px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; color: var(--text);">🎉 Effet : Social / Party</span>
-        </div>
-        
-        <button class="btn-add" style="font-size: 1.1rem; padding: 18px; width: 100%; max-width: 400px; background: var(--gold); color: #000; border: none; border-radius: 6px; font-weight: 900; cursor: pointer; text-transform: uppercase;" onclick="addToCart('party', 'Party Pack – 50 joints', 40000)">🛒 Ajouter au Panier</button>
-        
-        <div style="margin-top: 30px; padding: 20px; background: rgba(255,209,1,0.05); border: 1px solid rgba(255,209,1,0.1); border-radius: 8px;">
-          <p style="font-size: 0.9rem; color: var(--text2); display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">🛵 <strong>Livraison Express :</strong> Moins de 2H à Douala et Yaoundé</p>
-          <p style="font-size: 0.9rem; color: var(--text2); display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">🤐 <strong>Discrétion 100% :</strong> Colis scellé, sans odeur, livreur anonyme</p>
-          <p style="font-size: 0.9rem; color: var(--text2); display: flex; align-items: center; gap: 10px;">🔒 <strong>Paiement Sécurisé :</strong> MTN MoMo & Orange Money</p>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</section>
-  <!-- FOOTER -->undefined

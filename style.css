@@ -441,7 +441,7 @@ body{background:var(--bg-dark);color:var(--text-main);font-family:var(--font-bod
   .card-rating{font-size:.8rem}
   .card-tags{display:none}
   .variant-select{padding:6px;font-size:.75rem}
-  .card-actions{gap:6px;}
+  .card-actions{grid-template-columns:1fr;gap:6px;}
   .btn-buy-now,.btn-add-cart{padding:8px 4px;font-size:.68rem;letter-spacing:0}
   .footer-grid{grid-template-columns:1fr}
   .cart-sidebar{width:100%;right:-100%}
