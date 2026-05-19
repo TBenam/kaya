@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tous nos Produits CBD - KAYA</title>
+  <meta name="description" content="Découvrez notre sélection de fleurs de CBD premium et packs pré-roulés. Livraison rapide 2H à Douala et Yaoundé sous pli discret."/>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <!-- Polices claires (Outfit) et géométriques modernes pour les titres (Plus Jakarta Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- URGENCY BAR (Jaune Golden CBD) -->
+<div class="urgency-bar">
+  <div class="container urgency-inner">
+    <span>-55% SUR TOUT LE SITE AVEC LE CODE KAYA !</span>
+    <div class="countdown">
+      <span class="cd-box">00 <small>JOURS</small></span> : 
+      <span class="cd-box">00 <small>HEURES</small></span> : 
+      <span class="cd-box">00 <small>MINUTES</small></span> : 
+      <span class="cd-box">00 <small>SECONDES</small></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-kaya">KAYA</span>
+      <span class="logo-dot">CBD</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="produits.html" class="highlight-link" onclick="closeMenu()">Produits ▾</a>
+      <a href="index.html#mission" onclick="closeMenu()">Get High</a>
+      <a href="index.html#rappeurs" onclick="closeMenu()">Kaya Club ▾</a>
+      <a href="index.html#faq" onclick="closeMenu()">Aide et Suivi ▾</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn search-icon">🔍</button>
+      <button class="icon-btn account-icon">👤</button>
+      <button class="btn-cart" id="cartBtn" onclick="toggleCart()">
+        🛍️ <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</header>
+
+<main class="main-content" style="padding-top: 150px;">
+  <div class="container">
+    
+    <div class="section-header-row centered" style="margin-bottom: 40px; justify-content: center; text-align: center;">
+      <div class="header-text-block">
+        <h1 class="section-title">NOS PRODUITS <span class="yellow">CBD PREMIUM</span></h1>
+        <p class="section-desc" style="max-width: 650px; margin: 15px auto 0;">Fleurs cultivées en intérieur (Indoor), sélectionnées rigoureusement et roulées sous pli discret. Livraison anonyme express sous 2 heures à Douala et Yaoundé.</p>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="catalog-filters">
+      <button class="filter-btn active" data-filter="all">Tous les produits</button>
+      <button class="filter-btn" data-filter="fleurs">Fleurs de CBD</button>
+      <button class="filter-btn" data-filter="packs">Packs & Pré-roulés</button>
+    </div>
+
+    <!-- Catalog Product Grid -->
+    <div class="product-grid">
+      
+      <!-- Product 1: Pack Start -->
+      <div class="card-product" data-category="packs">
+        <div class="card-badge">DÉCOUVERTE</div>
+        <a href="produit-pack-start.html" style="display:block;"><div class="card-image-box">
+          <img src="images/imagespack_start.png" alt="Pack Start" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='🌿';">
+        </div></a>
+        <div class="card-content">
+          <h3 class="card-title">PACK START KAYA</h3>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span> <span class="rating-note">4.8/5 (72)</span>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CBD 12%</span>
+            <span class="tag">GreenHouse</span>
+            <span class="tag">Initiation</span>
+          </div>
+          <div class="card-scarcity">🔥 Recommandé pour débuter</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">5 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
+          <div class="card-selector">
+            <select class="variant-select" data-id="start" onchange="updateCardPrice(this)">
+              <option value="5" data-price="5000">5 joints (1000F/u) - 5 000F</option>
+            </select>
+          </div>
+          <button class="btn-add-cart" onclick="addFromCard('start', 'PACK START KAYA', this)">AJOUTER AU PANIER</button>
+        </div>
+      </div>
+
+      <!-- Product 2: Pack Semaine -->
+      <div class="card-product" data-category="packs">
+        <div class="card-badge">BESTSELLER</div>
+        <a href="produit-semaine.html" style="display:block;"><div class="card-image-box">
+          <img src="images/imagespack_semaine.png" alt="Pack Semaine" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='🌿';">
+        </div></a>
+        <div class="card-content">
+          <h3 class="card-title">PACK SEMAINE KAYA</h3>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span> <span class="rating-note">5.0/5 (165)</span>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CBD 15%</span>
+            <span class="tag">Indoor</span>
+            <span class="tag">Chill</span>
+          </div>
+          <div class="card-scarcity">🔥 Plus que 4 en stock !</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">9 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
+          <div class="card-selector">
+            <select class="variant-select" data-id="semaine" onchange="updateCardPrice(this)">
+              <option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option>
+              <option value="15" data-price="13000">15 joints (866F/u) - 13 000F</option>
+            </select>
+          </div>
+          <button class="btn-add-cart" onclick="addFromCard('semaine', 'PACK SEMAINE KAYA', this)">AJOUTER AU PANIER</button>
+        </div>
+      </div>
+
+      <!-- Product 3: Pochon Fleurs Premium -->
+      <div class="card-product" data-category="fleurs">
+        <div class="card-badge">BESTSELLER</div>
+        <a href="produit-fleur.html" style="display:block;"><div class="card-image-box">
+          <img src="images/imagesfleur_5g.png" alt="Pochon Fleurs Premium" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='💎';">
+        </div></a>
+        <div class="card-content">
+          <h3 class="card-title">POCHON FLEURS PREMIUM</h3>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span> <span class="rating-note">4.9/5 (234)</span>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CBD 24%</span>
+            <span class="tag">Purple Punch</span>
+          </div>
+          <div class="card-scarcity">⚡ Forte demande - 7 personnes regardent</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">8 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
+          <div class="card-selector">
+            <select class="variant-select" data-id="fleur" onchange="updateCardPrice(this)">
+              <option value="5g" data-price="8000">5g (1600F/g) - 8 000F</option>
+              <option value="10g" data-price="15000">10g (1500F/g) - 15 000F</option>
+              <option value="3g" data-price="5000">3g (1666F/g) - 5 000F</option>
+            </select>
+          </div>
+          <button class="btn-add-cart" onclick="addFromCard('fleur', 'POCHON FLEURS PREMIUM', this)">AJOUTER AU PANIER</button>
+        </div>
+      </div>
+
+      <!-- Product 4: Pack Chill -->
+      <div class="card-product" data-category="packs">
+        <div class="card-badge">BESTSELLER</div>
+        <a href="produit-chill.html" style="display:block;"><div class="card-image-box">
+          <img src="images/imagespack_chill.png" alt="Pack Chill" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='✨';">
+        </div></a>
+        <div class="card-content">
+          <h3 class="card-title">PACK CHILL KAYA</h3>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span> <span class="rating-note">4.8/5 (98)</span>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CBD 18%</span>
+            <span class="tag">Relax</span>
+          </div>
+          <div class="card-scarcity">🔥 Presque en rupture - 2 restants</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">17 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
+          <div class="card-selector">
+            <select class="variant-select" data-id="chill" onchange="updateCardPrice(this)">
+              <option value="20" data-price="17000">20 joints (850F/u) - 17 000F</option>
+            </select>
+          </div>
+          <button class="btn-add-cart" onclick="addFromCard('chill', 'PACK CHILL KAYA', this)">AJOUTER AU PANIER</button>
+        </div>
+      </div>
+
+      <!-- Product 5: Party Pack -->
+      <div class="card-product" data-category="packs">
+        <div class="card-badge-promo">NEW</div>
+        <div class="card-badge" style="left:54px;">PROMO</div>
+        <a href="produit-party.html" style="display:block;"><div class="card-image-box">
+          <img src="images/imagespack_party.png" alt="Party Pack" class="card-img" onerror="this.src=''; this.className='card-img-error'; this.alt='🎉';">
+        </div></a>
+        <div class="card-content">
+          <h3 class="card-title">PARTY PACK KAYA</h3>
+          <div class="card-rating">
+            <span class="stars">★★★★★</span> <span class="rating-note">5.0/5 (42)</span>
+          </div>
+          <div class="card-tags">
+            <span class="tag">CBD 20%</span>
+            <span class="tag">Gros Volume</span>
+          </div>
+          <div class="card-scarcity">⚡ Offre Limitée - Économisez 5 000F</div>
+          <div class="card-price-row">
+            <span class="card-price-label">Prix :</span>
+            <span class="card-price-display"><span class="price-amount">40 000</span> <span class="card-price-currency">FCFA</span></span>
+          </div>
+          <div class="card-selector">
+            <select class="variant-select" data-id="party" onchange="updateCardPrice(this)">
+              <option value="50" data-price="40000">50 joints (800F/u) - 40 000F</option>
+            </select>
+          </div>
+          <button class="btn-add-cart" onclick="addFromCard('party', 'PARTY PACK KAYA', this)">AJOUTER AU PANIER</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER REVIEWS -->
+<section class="footer-reviews">
+  <div class="container">
+    <h2 class="section-title centered">+ DE 100 000 CLIENTS <span class="yellow">FIDÈLES</span></h2>
+    <div class="reviews-grid">
+      <div class="review-box">
+        <p class="review-title">Super service</p>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <div class="review-box">
+        <p class="review-title">Excellent CBD</p>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <div class="review-box">
+        <p class="review-title">Livraison rapide</p>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <div class="review-box">
+        <p class="review-title">Top qualité</p>
+        <span class="review-stars">★★★★★</span>
+      </div>
+      <div class="review-box">
+        <p class="review-title">Commandes anonymes</p>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER LINKS -->
+<footer class="footer-main">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <h3 class="footer-logo">KAYA<span class="yellow">.</span></h3>
+      <p class="footer-desc">L'alternative haut de gamme, sécurisée et connectée pour les passionnés de CBD au Cameroun.</p>
+      <a href="https://t.me/KayaSupportBot" class="btn-telegram-footer" target="_blank">Rejoindre Telegram</a>
+    </div>
+    <div class="footer-links">
+      <h4>BOUTIQUE</h4>
+      <a href="index.html#fleurs">Fleurs</a>
+      <a href="index.html#pre-roules">Pré-roulés</a>
+      <a href="index.html#resines">Résines</a>
+      <a href="index.html#accessoires">Accessoires</a>
+    </div>
+    <div class="footer-links">
+      <h4>LÉGAL</h4>
+      <a href="#">Conditions de Livraison</a>
+      <a href="#">Politique de Confidentialité</a>
+      <a href="#">Mentions Légales</a>
+      <a href="#">Suivi de commande</a>
+    </div>
+    <div class="footer-contact">
+      <h4>NOUS CONTACTER</h4>
+      <p>✈️ Telegram : @KayaSupportBot</p>
+      <p>📍 Douala - Yaoundé</p>
+      <p class="footer-warning">⚠️ Produit réservé à l'usage exclusif de personnes majeures. Consommez avec modération.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 KAYA. Inspiré des standards haut de gamme européens.</p>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Mon Panier</h3>
+    <button onclick="toggleCart()" class="cart-close">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"><p class="cart-empty">Votre panier est vide.</p></div>
+  <div class="cart-footer">
+    <div class="cart-total">TOTAL : <strong id="cartTotal" class="yellow">0 FCFA</strong></div>
+    <button class="btn-checkout-solid" id="checkoutBtn" onclick="checkout()">VALIDER MA COMMANDE 🚀</button>
+  </div>
+</div>
+
+<!-- MODAL CHECKOUT FORM -->
+<div class="modal-overlay" id="checkoutModalOverlay">
+  <div class="modal-card" style="padding-top: 40px; position: relative;">
+    <button onclick="closeCheckoutModal()" class="cart-close" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #fff;">✕</button>
+    <div class="modal-icon">🚚</div>
+    <h3 class="modal-title">VALIDER LA COMMANDE</h3>
+    <p class="modal-text">Remplissez vos informations pour une livraison discrète.</p>
+    
+    <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left; margin-top: 20px;">
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Lieu de livraison *</label>
+        <input type="text" id="deliveryLocation" placeholder="ex: omnisports, yaoundé" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
+      </div>
+
+      <div style="background: rgba(255, 204, 0, 0.1); border: 1px solid rgba(255, 204, 0, 0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.4;">Veuillez remplir au moins <strong>un</strong> des deux champs de contact ci-dessous. <br><span style="color: #ffcc00;">Pour plus d'anonymat, le @Telegram est recommandé.</span></p>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Numéro WhatsApp</label>
+        <input type="text" id="contactWhatsApp" placeholder="ex: 6 XX XX XX XX" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">@Telegram</label>
+        <input type="text" id="contactTelegram" placeholder="ex: @monpseudo" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
+      </div>
+      
+      <p id="checkoutError" style="color: #ff4d4d; font-size: 0.85rem; margin-bottom: 15px; display: none;"></p>
+
+      <button type="submit" class="btn-yellow-solid" id="submitOrderBtn" style="width: 100%; justify-content: center;">CONFIRMER MA COMMANDE</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL SUCCESS FINAL -->
+<div class="modal-overlay" id="successModalOverlay">
+  <div class="modal-card">
+    <div class="modal-icon">✅</div>
+    <h3 class="modal-title">COMMANDE ENREGISTRÉE</h3>
+    <p class="modal-text">Votre commande a bien été reçue ! Un conseiller va vous contacter très rapidement pour la livraison.</p>
+    <button class="btn-modal-confirm" onclick="closeSuccessModal()">RETOURNER À LA BOUTIQUE</button>
+  </div>
+</div>
+
+<script type="module" src="app.js"></script>
+
+<!-- Filter Script -->
+<script>
+  // Simple layout utility for filters
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      document.querySelectorAll('.card-product').forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

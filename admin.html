@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KAYA – Admin CRM</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+<!-- LOGIN VIEW -->
+<div id="loginView" class="view-container active">
+  <div class="login-box">
+    <div class="login-logo">
+      <span class="logo-kaya">KAYA</span><span class="logo-dot">CBD</span>
+    </div>
+    <h2>Admin Portal</h2>
+    <p>Connectez-vous pour gérer les commandes.</p>
+    <button id="googleLoginBtn" class="btn-google">
+      <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      Continuer avec Google
+    </button>
+    <p id="loginError" class="error-msg"></p>
+  </div>
+</div>
+
+<!-- DASHBOARD VIEW -->
+<div id="dashboardView" class="view-container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-kaya">KAYA</span><span class="logo-dot">.</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-view="dashboard" onclick="switchView('dashboard', this)">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" data-view="orders" onclick="switchView('orders', this)">
+        <span class="nav-icon">🛒</span> Commandes
+        <span class="nav-badge" id="pendingBadge" style="display:none">0</span>
+      </a>
+      <a href="#" class="nav-item" data-view="products" onclick="switchView('products', this)">
+        <span class="nav-icon">📦</span> Produits
+      </a>
+      <a href="#" class="nav-item" data-view="badges" onclick="switchView('badges', this)">
+        <span class="nav-icon">🏆</span> Trophées
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div id="adminEmail" class="admin-email">...</div>
+      <button id="logoutBtn" class="btn-logout">Déconnexion</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-area">
+
+    <!-- ==================== DASHBOARD VIEW ==================== -->
+    <div id="view-dashboard" class="content-view active">
+      <header class="topbar">
+        <div>
+          <h2>Dashboard</h2>
+          <p class="topbar-sub" id="dashboardDate">Aujourd'hui</p>
+        </div>
+        <div class="topbar-actions">
+          <select id="periodSelector" class="period-select" onchange="onPeriodChange()">
+            <option value="today">Aujourd'hui</option>
+            <option value="week" selected>7 derniers jours</option>
+            <option value="month">30 derniers jours</option>
+            <option value="all">Tout le temps</option>
+          </select>
+        </div>
+      </header>
+
+      <div class="view-body">
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-yellow">
+          <div class="kpi-icon">💰</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Chiffre d'Affaires</div>
+            <div class="kpi-value" id="kpiRevenue">0 FCFA</div>
+            <div class="kpi-delta" id="kpiRevenueDelta"></div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">📦</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Commandes</div>
+            <div class="kpi-value" id="kpiOrders">0</div>
+            <div class="kpi-delta" id="kpiOrdersDelta"></div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">🔥</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Panier Moyen</div>
+            <div class="kpi-value" id="kpiAvg">0 FCFA</div>
+            <div class="kpi-delta" id="kpiAvgDelta"></div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">✅</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Livrées</div>
+            <div class="kpi-value" id="kpiDelivered">0</div>
+            <div class="kpi-delta" id="kpiDeliveredDelta"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHART + ACTIVITY FEED -->
+      <div class="chart-activity-row">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>Revenus</h3>
+          </div>
+          <canvas id="revenueChart" height="220"></canvas>
+          <div class="chart-legend" id="chartLegend"></div>
+        </div>
+
+        <!-- ACTIVITY FEED -->
+        <div class="activity-card">
+          <h3>⚡ Activité en direct</h3>
+          <div class="activity-feed" id="activityFeed">
+            <p class="empty-state">Aucune activité récente.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBJECTIVES + STREAK -->
+      <div class="objectives-row">
+        <div class="objective-card">
+          <div class="objective-header">
+            <h3>🎯 Objectif Mensuel</h3>
+            <button class="btn-edit-goal" onclick="openGoalModal('monthly')">Modifier</button>
+          </div>
+          <div class="goal-amount-row">
+            <span id="goalMonthlyActual">0 FCFA</span>
+            <span class="goal-sep"> / </span>
+            <span id="goalMonthlyTarget" class="goal-target">500 000 FCFA</span>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar" id="goalMonthlyBar">
+              <div class="progress-fill" id="goalMonthlyFill" style="width:0%"></div>
+            </div>
+            <div class="progress-pct" id="goalMonthlyPct">0%</div>
+          </div>
+          <p class="goal-hint" id="goalMonthlyHint"></p>
+        </div>
+
+        <div class="objective-card">
+          <div class="objective-header">
+            <h3>🗓️ Objectif Hebdo</h3>
+            <button class="btn-edit-goal" onclick="openGoalModal('weekly')">Modifier</button>
+          </div>
+          <div class="goal-amount-row">
+            <span id="goalWeeklyActual">0 FCFA</span>
+            <span class="goal-sep"> / </span>
+            <span id="goalWeeklyTarget" class="goal-target">100 000 FCFA</span>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar" id="goalWeeklyBar">
+              <div class="progress-fill" id="goalWeeklyFill" style="width:0%"></div>
+            </div>
+            <div class="progress-pct" id="goalWeeklyPct">0%</div>
+          </div>
+          <p class="goal-hint" id="goalWeeklyHint"></p>
+        </div>
+
+        <div class="streak-card">
+          <div class="streak-fire">🔥</div>
+          <div class="streak-number" id="streakCount">0</div>
+          <div class="streak-label">Jours consécutifs<br>avec objectif atteint</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== ORDERS VIEW ==================== -->
+    <div id="view-orders" class="content-view">
+      <header class="topbar">
+        <h2>Commandes</h2>
+        <div class="topbar-actions">
+          <select id="statusFilter" class="period-select" onchange="filterOrders()">
+            <option value="all">Tous les statuts</option>
+            <option value="pending">En attente</option>
+            <option value="delivered">Livrées</option>
+            <option value="cancelled">Annulées</option>
+          </select>
+        </div>
+      </header>
+      <div class="table-container">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Contact</th>
+              <th>Livraison</th>
+              <th>Articles</th>
+              <th>Total</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody"></tbody>
+        </table>
+        <div id="ordersEmpty" class="empty-state" style="display:none; padding: 40px;">Aucune commande trouvée.</div>
+      </div>
+    </div>
+
+    <!-- ==================== PRODUCTS VIEW ==================== -->
+    <div id="view-products" class="content-view">
+      <header class="topbar">
+        <h2>Performance Produits</h2>
+      </header>
+      <div class="products-content">
+        <div class="products-card">
+          <h3>🏅 Classement des Ventes</h3>
+          <div id="productRanking"></div>
+        </div>
+        <div class="products-card">
+          <h3>📊 Répartition des Revenus</h3>
+          <canvas id="productChart" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== BADGES VIEW ==================== -->
+    <div id="view-badges" class="content-view">
+      <header class="topbar">
+        <h2>Trophées & Hall of Fame</h2>
+      </header>
+      <div class="badges-grid" id="badgesGrid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- GOAL EDIT MODAL -->
+<div class="modal-overlay" id="goalModal">
+  <div class="modal-card" style="max-width: 400px;">
+    <h3 class="modal-title" id="goalModalTitle">Modifier l'objectif</h3>
+    <p class="modal-text">Définissez votre objectif en FCFA :</p>
+    <input type="number" id="goalInput" placeholder="ex: 500000" class="goal-input" min="0" step="1000"/>
+    <div style="display:flex; gap: 10px; margin-top: 20px;">
+      <button class="btn-modal-confirm" onclick="saveGoal()" style="flex:1;">Sauvegarder</button>
+      <button class="btn-logout" onclick="closeGoalModal()" style="flex:1; padding: 12px;">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- BADGE UNLOCK NOTIFICATION -->
+<div class="badge-notif" id="badgeNotif">
+  <div class="badge-notif-inner">
+    <span class="badge-notif-icon" id="badgeNotifIcon">🏆</span>
+    <div>
+      <div class="badge-notif-title">Badge débloqué !</div>
+      <div class="badge-notif-name" id="badgeNotifName"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
