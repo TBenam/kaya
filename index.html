@@ -361,26 +361,7 @@
             </div>
         </div>
 
-        <!-- FAQ -->
-        <div id="faq-section" class="glass-card">
-            <h2>Le Sas de Décompression</h2>
-            <p>Avant d'aller plus loin, quelques infos utiles :</p>
-            
-            <details class="faq-item">
-                <summary>C'est quoi ce délire ?</summary>
-                <p>Vous venez de découvrir KAYA, le côté secret de la détente. Fini les bougies classiques, place au vrai bien-être et à la relaxation profonde.</p>
-            </details>
-            <details class="faq-item">
-                <summary>C'est légal votre truc ?</summary>
-                <p>100% légal, 0% bad trip. On ne vend que du CBD premium, rigoureusement testé en laboratoire et respectant strictement les normes européennes.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Je vais planer ?</summary>
-                <p>Vous allez surtout relâcher la pression. Nos produits apaisent le corps et l'esprit, sans les effets psychotropes du THC. Juste du chill à l'état pur.</p>
-            </details>
 
-            <button class="skip-btn" onclick="startTrip()">Je suis prêt, faites-moi décoller 🚀</button>
-        </div>
 
     </div>
 
@@ -457,8 +438,7 @@
 
         function acceptAge() {
             ageCheck.style.display = 'none';
-            faqSection.style.display = 'block';
-            faqSection.style.animation = 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+            startTrip();
         }
 
         function rejectAge() {
