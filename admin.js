@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_jmysMG0YAU28Zr0gE46BtNDm1gUPc0g",
@@ -350,12 +350,10 @@ function renderOrdersTable() {
       : (o.product ? `1× ${o.product}` : 'N/A');
     const badgeClass = o.status === 'delivered' ? 'badge-delivered' : o.status === 'cancelled' ? 'badge-cancelled' : 'badge-pending';
     const statusLabel = o.status === 'delivered' ? 'Livrée' : o.status === 'cancelled' ? 'Annulée' : 'En attente';
-    const statusActionBtn = o.status === 'pending'
-      ? `<button class="btn-action" onclick="window.updateStatus('${o.id}','delivered')">✅ Livrer</button>`
-      : `<button class="btn-action" onclick="window.updateStatus('${o.id}','pending')">⏳ En attente</button>`;
-    const deleteBtn = `<button class="btn-action cancel" onclick="window.deleteOrder('${o.id}')" style="margin-left:4px">🗑️</button>`;
-    const actions = `<div style="display:flex; gap:4px;">${statusActionBtn}${deleteBtn}</div>`;
-
+    const actions = o.status === 'pending'
+      ? `<button class="btn-action" onclick="window.updateStatus('${o.id}','delivered')">✅ Livrer</button>
+         <button class="btn-action cancel" onclick="window.updateStatus('${o.id}','cancelled')" style="margin-left:4px">❌</button>`
+      : '—';
     return `<tr>
       <td>${date}</td><td>${contact}</td><td>${o.location || 'N/A'}</td>
       <td><div class="items-list">${items}</div></td>
@@ -369,23 +367,7 @@ function renderOrdersTable() {
 window.filterOrders = renderOrdersTable;
 
 window.updateStatus = async function (id, status) {
-  try {
-    await updateDoc(doc(db, 'orders', id), { status });
-  } catch (e) {
-    console.error("Error updating order status:", e);
-    alert("Erreur lors de la mise à jour du statut.");
-  }
-};
-
-window.deleteOrder = async function (id) {
-  if (confirm("Voulez-vous vraiment supprimer cette commande ? Cette action est irréversible.")) {
-    try {
-      await deleteDoc(doc(db, 'orders', id));
-    } catch (e) {
-      console.error("Error deleting order:", e);
-      alert("Erreur lors de la suppression de la commande.");
-    }
-  }
+  await updateDoc(doc(db, 'orders', id), { status });
 };
 
 function updatePendingBadge() {
