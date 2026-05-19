@@ -55,7 +55,7 @@ products.forEach(p => {
           </select>
         </div>
         
-        <button class="btn-yellow-solid" style="width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem;" onclick="addFromCard('${p.id}', '${p.title}', this)">AJOUTER AU PANIER</button>
+        <button class="btn-yellow-solid" style="width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem;" onclick="openCheckout('${p.title}', ${p.price}, '${p.id}')">⚡ ACHETER</button>
         
         <div style="margin-top: 30px; padding: 20px; background: rgba(255,209,1,0.05); border: 1px solid rgba(255,209,1,0.1); border-radius: 8px;">
           <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 12px;">🛵 <strong>Livraison Express :</strong> Anonyme sous 2-3H (Douala/Yaoundé)</p>

@@ -49,115 +49,92 @@
       <div class="header-actions">
         <button class="icon-btn search-icon">🔍</button>
         <button class="icon-btn account-icon">👤</button>
-        <button class="btn-cart" id="cartBtn" onclick="toggleCart()">
-          🛍️ <span class="cart-count" id="cartCount">0</span>
-        </button>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
       </div>
     </div>
   </header>
 
   <!-- HERO FULL-WIDTH BANNER -->
-
-  <!-- PRODUCT DETAIL SECTION -->
-  <section class="tops-ventes" style="padding: 150px 0 80px;">
-    <div class="container">
-      <a href="boutique.html" class="yellow"
-        style="text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la
-        boutique</a>
-
-      <div
-        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: start;">
-
-        <!-- Product Image -->
-        <div class="card-product" style="max-width: 500px; margin: 0; cursor: default;">
-          <div class="card-badge">BESTSELLER</div>
-          <div class="card-image-box" style="height: 400px;">
-            <img src="images/imagespack_semaine.png" alt="PACK SEMAINE KAYA" class="card-img"
-              style="object-fit: cover; height: 100%;">
-          </div>
-        </div>
-
-        <!-- Product Info -->
-        <div class="product-info">
-          <h1 class="section-title" style="text-align: left; margin-bottom: 20px;">PACK SEMAINE KAYA</h1>
-          <div class="card-rating" style="margin-bottom: 20px;">
-            <span class="stars" style="font-size: 1.2rem;">★★★★★</span> <span class="rating-note"
-              style="font-size: 1rem;">5.0/5</span>
-          </div>
-
-          <p class="section-desc" style="text-align: left; margin-bottom: 30px; font-size: 1.1rem; color: #eee;">Le pack
-            idéal pour votre semaine. 10 joints de Cannabis Premium à un prix avantageux. L'équilibre parfait entre
-            détente et énergie.</p>
-
-          <div class="card-tags" style="margin-bottom: 20px; justify-content: flex-start;">
-            <span class="tag" style="font-size: 0.9rem; padding: 6px 12px;">Cannabis 15%</span><span class="tag"
-              style="font-size: 0.9rem; padding: 6px 12px;">Indoor</span><span class="tag"
-              style="font-size: 0.9rem; padding: 6px 12px;">Chill</span>
-          </div>
-
-          <div class="card-price-row"
-            style="margin-bottom: 25px; margin-top: 0; justify-content: flex-start; gap: 15px; align-items: baseline;">
-            <span class="card-price-label" style="font-size: 1rem; color: var(--text-muted);">Prix :</span>
-            <span class="card-price-display" style="font-size: 2.2rem; font-weight: 900; color: var(--gold);"><span
-                class="price-amount">9 000</span> <span class="card-price-currency"
-                style="font-size: 1.2rem; color: #fff;">FCFA</span></span>
-          </div>
-
-          <div class="card-selector" style="margin-bottom: 30px;">
-            <select class="variant-select" data-id="semaine" onchange="updateCardPrice(this)"
-              style="font-size: 1rem; padding: 15px; width: 100%;">
-              <option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option>
-              <option value="15" data-price="13000">15 joints (866F/u) - 13 000F</option>
-            </select>
-          </div>
-
-          <button class="btn-yellow-solid"
-            style="width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem;"
-            onclick="addFromCard('semaine', 'PACK SEMAINE KAYA', this)">AJOUTER AU PANIER</button>
-
-          <div
-            style="margin-top: 30px; padding: 20px; background: rgba(255,209,1,0.05); border: 1px solid rgba(255,209,1,0.1); border-radius: 8px;">
-            <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 12px;">🛵 <strong>Livraison Express :</strong>
-              Anonyme sous 2-3H (Douala/Yaoundé)</p>
-            <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 12px;">🤐 <strong>Discrétion 100% :</strong> Colis
-              scellé, sans odeur</p>
-            <p style="font-size: 0.95rem; color: #ccc; margin: 0;">🔒 <strong>Paiement Sécurisé :</strong> MTN MoMo &
-              Orange Money</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <section class="footer-reviews">
-    <div class="container">
-      <h2 class="section-title centered">+ DE 100 000 CLIENTS <span class="yellow">FIDÈLES</span></h2>
-
-      <div class="reviews-grid">
-        <div class="review-box">
-          <p class="review-title">Super service</p>
-          <span class="review-stars">★★★★★</span>
-        </div>
-        <div class="review-box">
-          <p class="review-title">Excellent Cannabis</p>
-          <span class="review-stars">★★★★★</span>
-        </div>
-        <div class="review-box">
-          <p class="review-title">Livraison rapide</p>
-          <span class="review-stars">★★★★★</span>
-        </div>
-        <div class="review-box">
-          <p class="review-title">Top qualité</p>
-          <span class="review-stars">★★★★★</span>
-        </div>
-        <div class="review-box">
-          <p class="review-title">Commandes anonymes</p>
-          <span class="review-stars">★★★★★</span>
+  
+<!-- PRODUCT DETAIL SECTION -->
+<section class="tops-ventes" style="padding: 150px 0 80px;">
+  <div class="container">
+    <a href="boutique.html" class="yellow" style="text-decoration: none; font-weight: 700; display: inline-block; margin-bottom: 30px;">← Retour à la boutique</a>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: start;">
+      
+      <!-- Product Image -->
+      <div class="card-product" style="max-width: 500px; margin: 0; cursor: default;">
+        <div class="card-badge">BESTSELLER</div>
+        <div class="card-image-box" style="height: 400px;">
+          <img src="images/imagespack_semaine.png" alt="PACK SEMAINE KAYA" class="card-img" style="object-fit: cover; height: 100%;">
         </div>
       </div>
+      
+      <!-- Product Info -->
+      <div class="product-info">
+        <h1 class="section-title" style="text-align: left; margin-bottom: 20px;">PACK SEMAINE KAYA</h1>
+        <div class="card-rating" style="margin-bottom: 20px;">
+          <span class="stars" style="font-size: 1.2rem;">★★★★★</span> <span class="rating-note" style="font-size: 1rem;">5.0/5</span>
+        </div>
+        
+        <p class="section-desc" style="text-align: left; margin-bottom: 30px; font-size: 1.1rem; color: #eee;">Le pack idéal pour votre semaine. 10 joints de Cannabis Premium à un prix avantageux. L'équilibre parfait entre détente et énergie.</p>
+        
+        <div class="card-tags" style="margin-bottom: 20px; justify-content: flex-start;">
+          <span class="tag" style="font-size: 0.9rem; padding: 6px 12px;">Cannabis 15%</span><span class="tag" style="font-size: 0.9rem; padding: 6px 12px;">Indoor</span><span class="tag" style="font-size: 0.9rem; padding: 6px 12px;">Chill</span>
+        </div>
+
+        <div class="card-price-row" style="margin-bottom: 25px; margin-top: 0; justify-content: flex-start; gap: 15px; align-items: baseline;">
+          <span class="card-price-label" style="font-size: 1rem; color: var(--text-muted);">Prix :</span>
+          <span class="card-price-display" style="font-size: 2.2rem; font-weight: 900; color: var(--gold);"><span class="price-amount">9 000</span> <span class="card-price-currency" style="font-size: 1.2rem; color: #fff;">FCFA</span></span>
+        </div>
+        
+        <div class="card-selector" style="margin-bottom: 30px;">
+          <select class="variant-select" data-id="semaine" onchange="updateCardPrice(this)" style="font-size: 1rem; padding: 15px; width: 100%;">
+            <option value="10" data-price="9000">10 joints (900F/u) - 9 000F</option><option value="15" data-price="13000">15 joints (866F/u) - 13 000F</option>
+          </select>
+        </div>
+        
+        <button class="btn-yellow-solid" style="width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem;" onclick="openCheckout('PACK SEMAINE KAYA', 9000, 'semaine')">⚡ ACHETER</button>
+        
+        <div style="margin-top: 30px; padding: 20px; background: rgba(255,209,1,0.05); border: 1px solid rgba(255,209,1,0.1); border-radius: 8px;">
+          <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 12px;">🛵 <strong>Livraison Express :</strong> Anonyme sous 2-3H (Douala/Yaoundé)</p>
+          <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 12px;">🤐 <strong>Discrétion 100% :</strong> Colis scellé, sans odeur</p>
+          <p style="font-size: 0.95rem; color: #ccc; margin: 0;">🔒 <strong>Paiement Sécurisé :</strong> MTN MoMo & Orange Money</p>
+        </div>
+      </div>
+      
     </div>
-  </section>
+  </div>
+</section>
+<section class="footer-reviews">
+      <div class="container">
+        <h2 class="section-title centered">+ DE 100 000 CLIENTS <span class="yellow">FIDÈLES</span></h2>
+
+        <div class="reviews-grid">
+          <div class="review-box">
+            <p class="review-title">Super service</p>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-box">
+            <p class="review-title">Excellent Cannabis</p>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-box">
+            <p class="review-title">Livraison rapide</p>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-box">
+            <p class="review-title">Top qualité</p>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-box">
+            <p class="review-title">Commandes anonymes</p>
+            <span class="review-stars">★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -197,56 +174,45 @@
     </div>
   </footer>
 
-  <!-- CART DRAWER -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3>🛒 Mon Panier</h3>
-      <button onclick="toggleCart()" class="cart-close">✕</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <p class="cart-empty">Votre panier est vide.</p>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">TOTAL : <strong id="cartTotal" class="yellow">0 FCFA</strong></div>
-      <button class="btn-checkout-solid" id="checkoutBtn" onclick="checkout()">VALIDER MA COMMANDE 🚀</button>
-    </div>
-  </div>
+
 
   <!-- MODAL CHECKOUT FORM -->
   <div class="modal-overlay" id="checkoutModalOverlay">
     <div class="modal-card" style="padding-top: 40px; position: relative;">
       <button onclick="closeCheckoutModal()" class="cart-close"
         style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: #fff;">✕</button>
-      <div class="modal-icon">🚚</div>
-      <h3 class="modal-title">VALIDER LA COMMANDE</h3>
-      <p class="modal-text">Remplissez vos informations pour une livraison discrète.</p>
+      <div class="modal-icon">🛒</div>
+      <h3 class="modal-title">FINALISER MA COMMANDE</h3>
 
-      <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left; margin-top: 20px;">
+      <!-- Résumé produit -->
+      <div style="background: rgba(255,204,0,0.12); border: 1px solid rgba(255,204,0,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; text-align: left;">
+        <p style="margin:0; font-size:0.85rem; color:#aaa;">Produit sélectionné</p>
+        <p id="checkoutProductName" style="margin:4px 0 0; font-weight:700; font-size:1rem; color:#fff;">—</p>
+        <p id="checkoutProductPrice" style="margin:2px 0 0; font-weight:800; font-size:1.1rem; color:#ffcc00;">—</p>
+      </div>
+
+      <p class="modal-text" style="margin-bottom:18px;">Renseignez vos infos de livraison. Vous serez ensuite redirigé vers la page de paiement sécurisé.</p>
+
+      <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left;">
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Lieu de livraison
-            *</label>
-          <input type="text" id="deliveryLocation" placeholder="ex: omnisports, yaoundé" required
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📍 Lieu de livraison *</label>
+          <input type="text" id="deliveryLocation" placeholder="ex: Omnisports, Yaoundé" required
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
 
-        <div
-          style="background: rgba(255, 204, 0, 0.1); border: 1px solid rgba(255, 204, 0, 0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.4;">Veuillez remplir au moins
-            <strong>un</strong> des deux champs de contact ci-dessous. <br><span style="color: #ffcc00;">Pour plus
-              d'anonymat, le @Telegram est recommandé.</span>
-          </p>
+        <div style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.5;">Remplissez au moins <strong>un</strong> champ de contact.<br>
+            <span style="color: #ffcc00;">Le @Telegram garantit plus d'anonymat.</span></p>
         </div>
 
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">Numéro
-            WhatsApp</label>
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📱 Numéro WhatsApp</label>
           <input type="text" id="contactWhatsApp" placeholder="ex: 6 XX XX XX XX"
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">@Telegram</label>
+        <div class="form-group" style="margin-bottom: 22px;">
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">✈️ @Telegram</label>
           <input type="text" id="contactTelegram" placeholder="ex: @monpseudo"
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
@@ -254,7 +220,7 @@
         <p id="checkoutError" style="color: #ff4d4d; font-size: 0.85rem; margin-bottom: 15px; display: none;"></p>
 
         <button type="submit" class="btn-yellow-solid" id="submitOrderBtn"
-          style="width: 100%; justify-content: center;">CONFIRMER MA COMMANDE</button>
+          style="width: 100%; justify-content: center; font-size: 1rem;">PASSER AU PAIEMENT →</button>
       </form>
     </div>
   </div>
@@ -270,7 +236,9 @@
     </div>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>

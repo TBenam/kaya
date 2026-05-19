@@ -1,6 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+// Configuration Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyC_jmysMG0YAU28Zr0gE46BtNDm1gUPc0g",
   authDomain: "kaya-Cannabis-11161.firebaseapp.com",
@@ -10,8 +8,18 @@ const firebaseConfig = {
   appId: "1:837432075418:web:e34f812b517d56d4d36b23"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Initialisation de Firebase via la version Compat globale
+let db;
+try {
+  if (typeof firebase !== 'undefined') {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+  } else {
+    console.error("Firebase SDK non chargé");
+  }
+} catch (e) {
+  console.error("Erreur d'initialisation Firebase:", e);
+}
 
 // ──────────────────────────────────────────────────────────────────
 // LIENS DE PAIEMENT PAR PRODUIT
@@ -43,10 +51,12 @@ let currentOrder = {
 // MENU MOBILE
 // ──────────────────────────────────────────────────────────────────
 window.toggleMenu = function () {
-  document.getElementById('nav').classList.toggle('open');
+  const nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('open');
 };
 window.closeMenu = function () {
-  document.getElementById('nav').classList.remove('open');
+  const nav = document.getElementById('nav');
+  if (nav) nav.classList.remove('open');
 };
 
 // ──────────────────────────────────────────────────────────────────
@@ -101,7 +111,9 @@ window.openCheckout = function (productName, price, productId) {
   // Préparer et ouvrir le modal
   const errorEl = document.getElementById('checkoutError');
   if (errorEl) errorEl.style.display = 'none';
-  document.getElementById('checkoutForm').reset();
+  
+  const form = document.getElementById('checkoutForm');
+  if (form) form.reset();
 
   // Afficher le produit dans le modal
   const titleEl = document.getElementById('checkoutProductName');
@@ -109,81 +121,109 @@ window.openCheckout = function (productName, price, productId) {
   if (titleEl) titleEl.innerText = productName;
   if (priceEl) priceEl.innerText = price.toLocaleString('fr-FR') + ' FCFA';
 
-  document.getElementById('checkoutModalOverlay').classList.add('open');
+  const modal = document.getElementById('checkoutModalOverlay');
+  if (modal) modal.classList.add('open');
 };
 
 window.closeCheckoutModal = function () {
-  document.getElementById('checkoutModalOverlay').classList.remove('open');
+  const modal = document.getElementById('checkoutModalOverlay');
+  if (modal) modal.classList.remove('open');
 };
 
 // ──────────────────────────────────────────────────────────────────
-// SOUMISSION DU FORMULAIRE → FIREBASE → REDIRECTION NEERO
+// SOUMISSION DU FORMULAIRE → FIREBASE (RÉSILIENT) → REDIRECTION NEERO
 // ──────────────────────────────────────────────────────────────────
 window.submitOrder = async function (event) {
   event.preventDefault();
 
   const errorEl = document.getElementById('checkoutError');
-  errorEl.style.display = 'none';
+  if (errorEl) errorEl.style.display = 'none';
 
   const location = document.getElementById('deliveryLocation').value.trim();
   let whatsapp = document.getElementById('contactWhatsApp').value.trim();
   let telegram = document.getElementById('contactTelegram').value.trim();
 
   if (!whatsapp && !telegram) {
-    errorEl.innerText = "Veuillez remplir au moins le numéro WhatsApp ou le @Telegram.";
-    errorEl.style.display = 'block';
+    if (errorEl) {
+      errorEl.innerText = "Veuillez remplir au moins le numéro WhatsApp ou le @Telegram.";
+      errorEl.style.display = 'block';
+    }
     return;
   }
 
   if (whatsapp) {
     const cleanWhatsapp = whatsapp.replace(/\s+/g, '');
     if (!/^6\d{8}$/.test(cleanWhatsapp)) {
-      errorEl.innerText = "Le numéro WhatsApp doit contenir 9 chiffres et commencer par 6.";
-      errorEl.style.display = 'block';
+      if (errorEl) {
+        errorEl.innerText = "Le numéro WhatsApp doit contenir 9 chiffres et commencer par 6.";
+        errorEl.style.display = 'block';
+      }
       return;
     }
     whatsapp = cleanWhatsapp;
   }
 
   const btn = document.getElementById('submitOrderBtn');
-  btn.innerText = "TRAITEMENT...";
-  btn.disabled = true;
+  if (btn) {
+    btn.innerText = "TRAITEMENT...";
+    btn.disabled = true;
+  }
 
-  try {
-    await addDoc(collection(db, "orders"), {
-      product: currentOrder.name,
-      totalAmount: currentOrder.price,
-      location: location,
-      whatsapp: whatsapp,
-      telegram: telegram || '@Kayablackhat',
-      paymentUrl: currentOrder.paymentUrl,
-      status: "pending",
-      createdAt: serverTimestamp()
-    });
-
-    // Fermer le modal
+  // Fonction de redirection
+  const redirectToPayment = () => {
     window.closeCheckoutModal();
-
-    // Rediriger vers la page de paiement Neero
     if (currentOrder.paymentUrl) {
       window.location.href = currentOrder.paymentUrl;
     } else {
-      // Fallback improbable
-      document.getElementById('successModalOverlay').classList.add('open');
+      const successModal = document.getElementById('successModalOverlay');
+      if (successModal) successModal.classList.add('open');
     }
+  };
 
+  // On encapsule l'écriture Firebase dans un timeout de 1.2s max pour ne jamais bloquer l'utilisateur
+  const firebasePromise = new Promise(async (resolve, reject) => {
+    try {
+      if (db) {
+        await db.collection("orders").add({
+          product: currentOrder.name,
+          totalAmount: currentOrder.price,
+          location: location,
+          whatsapp: whatsapp,
+          telegram: telegram || '@Kayablackhat',
+          paymentUrl: currentOrder.paymentUrl,
+          status: "pending",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        resolve();
+      } else {
+        reject(new Error("Database not initialized"));
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+  const timeoutPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      console.warn("Firebase écriture expirée (timeout) - Redirection forcée");
+      resolve();
+    }, 1200); // 1.2 secondes maximum d'attente
+  });
+
+  try {
+    // On attend soit l'enregistrement Firebase soit le timeout de 1.2s
+    await Promise.race([firebasePromise, timeoutPromise]);
   } catch (e) {
-    console.error("Erreur Firebase:", e);
-    errorEl.innerText = "Une erreur est survenue. Veuillez réessayer.";
-    errorEl.style.display = 'block';
+    console.error("Erreur Firebase ignorée pour redirection rapide:", e);
   } finally {
-    btn.innerText = "PASSER AU PAIEMENT →";
-    btn.disabled = false;
+    // Quoi qu'il arrive, on redirige pour procéder au paiement
+    redirectToPayment();
   }
 };
 
 window.closeSuccessModal = function () {
-  document.getElementById('successModalOverlay').classList.remove('open');
+  const successModal = document.getElementById('successModalOverlay');
+  if (successModal) successModal.classList.remove('open');
 };
 
 // ──────────────────────────────────────────────────────────────────
