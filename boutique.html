@@ -54,6 +54,23 @@
     </div>
   </header>
 
+  <!-- HERO FULL-WIDTH BANNER -->
+  <section class="hero-banner" id="accueil">
+    <div class="hero-content container" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+      <div class="hero-visual" style="max-width: 600px; width: 100%;">
+        <!-- Buddha Image -->
+        <img src="images/imageshero_floating.png" alt="Buddha Cannabis KAYA" class="hero-floating-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="hero-img-fallback" style="display:none;">
+          <div class="fallback-lotus">🧘‍♂️</div>
+        </div>
+        <div class="hero-visual-text">
+          <span class="line-4">ON S'OCCUPE</span>
+          <span class="line-5">DE VOUS</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- TICKER MARQUEE (Yellow background) -->
   <div class="marquee-wrapper">
@@ -197,8 +214,8 @@
               </div>
 
               <div class="card-actions">
-                <button class="btn-buy-now" id="buy-chill"
-                  onclick="openCheckout('PACK CHILL KAYA', 17000, 'chill')">⚡ ACHETER</button>
+                <button class="btn-buy-now" id="buy-chill" onclick="openCheckout('PACK CHILL KAYA', 17000, 'chill')">⚡
+                  ACHETER</button>
               </div>
             </div>
           </div>
@@ -235,8 +252,8 @@
               </div>
 
               <div class="card-actions">
-                <button class="btn-buy-now" id="buy-party"
-                  onclick="openCheckout('PARTY PACK KAYA', 40000, 'party')">⚡ ACHETER</button>
+                <button class="btn-buy-now" id="buy-party" onclick="openCheckout('PARTY PACK KAYA', 40000, 'party')">⚡
+                  ACHETER</button>
               </div>
             </div>
           </div>
@@ -421,28 +438,35 @@
       <h3 class="modal-title">FINALISER MA COMMANDE</h3>
 
       <!-- Résumé produit -->
-      <div style="background: rgba(255,204,0,0.12); border: 1px solid rgba(255,204,0,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; text-align: left;">
+      <div
+        style="background: rgba(255,204,0,0.12); border: 1px solid rgba(255,204,0,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; text-align: left;">
         <p style="margin:0; font-size:0.85rem; color:#aaa;">Produit sélectionné</p>
         <p id="checkoutProductName" style="margin:4px 0 0; font-weight:700; font-size:1rem; color:#fff;">—</p>
         <p id="checkoutProductPrice" style="margin:2px 0 0; font-weight:800; font-size:1.1rem; color:#ffcc00;">—</p>
       </div>
 
-      <p class="modal-text" style="margin-bottom:18px;">Renseignez vos infos de livraison. Vous serez ensuite redirigé vers la page de paiement sécurisé.</p>
+      <p class="modal-text" style="margin-bottom:18px;">Renseignez vos infos de livraison. Vous serez ensuite redirigé
+        vers la page de paiement sécurisé.</p>
 
       <form id="checkoutForm" onsubmit="submitOrder(event)" style="text-align: left;">
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📍 Lieu de livraison *</label>
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📍 Lieu de livraison
+            *</label>
           <input type="text" id="deliveryLocation" placeholder="ex: Omnisports, Yaoundé" required
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
 
-        <div style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.5;">Remplissez au moins <strong>un</strong> champ de contact.<br>
-            <span style="color: #ffcc00;">Le @Telegram garantit plus d'anonymat.</span></p>
+        <div
+          style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-size: 0.8rem; color: #ccc; margin: 0; line-height: 1.5;">Remplissez au moins
+            <strong>un</strong> champ de contact.<br>
+            <span style="color: #ffcc00;">Le @Telegram garantit plus d'anonymat.</span>
+          </p>
         </div>
 
         <div class="form-group" style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📱 Numéro WhatsApp</label>
+          <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9rem;">📱 Numéro
+            WhatsApp</label>
           <input type="text" id="contactWhatsApp" placeholder="ex: 6 XX XX XX XX"
             style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-family: 'Outfit', sans-serif;">
         </div>
